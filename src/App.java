@@ -53,4 +53,7 @@ class App
 
     //  Edit item from product list
     public void editItem() {}
+
+    //  Grand Total
+    public float grandTotal() {}
 }
