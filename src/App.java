@@ -35,6 +35,8 @@ class App
 
         if (appType == interfaceType[1])
             startGui();
+
+        input.close();
     }
 
     //  Start TUI
