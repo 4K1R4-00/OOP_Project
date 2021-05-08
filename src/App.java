@@ -16,7 +16,7 @@ class App
     private Item[] checkout     =   new Item[20];
 
     //  Default constructor
-    App() 
+    App()
     {
         System.out.println("The app has been instantiated");
 
@@ -37,7 +37,10 @@ class App
     }
 
     //  Start TUI
-    public void startTui() {}
+    public void startTui()
+    {
+
+    }
 
     //  Start GUI
     public void startGui() {}
