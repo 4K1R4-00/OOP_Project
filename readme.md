@@ -4,6 +4,7 @@
 
 ## Class structure
 
+`
 POS
 |
 |-- App
@@ -12,3 +13,4 @@ POS
            |-- Service
      |-- GUI
      |-- TUI
+`
