@@ -12,6 +12,7 @@ class App
     //  Item product and services array
     private Item[] items    =   new Item[10];
 
+    
     //  Default constructor
     App() 
     {

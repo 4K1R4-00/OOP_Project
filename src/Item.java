@@ -16,19 +16,29 @@ class Item
     //  Default constructor
     Item () {}
 
-    Item (String item_name, float item_cost)
-    {
-        this.name   =   item_name;
-        this.cost   =   item_cost;
+    Item (String itemName, float itemCost){
+        this.name   =   itemName;
+        this.cost   =   itemCost;
     }
 
     /*
-     *  @param  float update_item_cost
+     *  @param  float updateItemCost
      *
      *  @return void
      */
-    public void updateCost(float updatedItemCost)
-    {
+    public void updateCost(float updatedItemCost){
         this.cost   =   updatedItemCost;
+    }
+
+    public void updateName(String updateItemName){
+        this.name   =   updateItemName;
+    }
+
+    public float getCost(){
+        return this.cost;
+    }
+
+    public String getName(){
+        return this.name;
     }
 }
