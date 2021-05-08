@@ -18,13 +18,13 @@ class App
         System.out.println("The app has been instantiated");
 
         Scanner input   =   new Scanner(System.in);
-        int appType     =   input.nextInt();
 
         System.out.println("Select application runtime mode  ");
         System.out.println("=================================");
         System.out.println("1. TUI Mode");
         System.out.println("2. GUI Mode");
         System.out.print("Enter Selection: ");
+        int appType     =   input.nextInt();
 
         if (appType == type[0])
             startTui();
