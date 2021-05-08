@@ -7,13 +7,16 @@ import java.util.Scanner;
 class App
 {
     //  either TUI or GUI type setting
-    private int[] type = {1, 2};
+    private int[] interfaceType = {1, 2};
 
-    //  Item product and services array
-    private Item[] items    =   new Item[10];
+    //  Current product and item catelog list
+    private Item[] items        =   new Item[10];
+
+    //  Item product and service checkout list
+    private Item[] checkout     =   new Item[20];
 
     //  Default constructor
-    App() 
+    App()
     {
         System.out.println("The app has been instantiated");
 
@@ -26,17 +29,28 @@ class App
         System.out.print("Enter Selection: ");
         int appType     =   input.nextInt();
 
-        if (appType == type[0])
+        if (appType == interfaceType[0])
             startTui();
 
-        if (appType == type[1])
+        if (appType == interfaceType[1])
             startGui();
     }
 
     //  Start TUI
-    public void startTui() {}
+    public void startTui()
+    {
+
+    }
 
     //  Start GUI
     public void startGui() {}
 
+    //  Add item to product list
+    public void addItem() {}
+
+    //  Remove item from product list
+    public void removeItem() {}
+
+    //  Edit item from product list
+    public void editItem() {}
 }
