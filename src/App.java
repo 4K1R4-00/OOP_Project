@@ -10,7 +10,8 @@ class App
     private int[] interfaceType = {1, 2};
 
     //  Current product and item catelog list
-    private Item[] items        =   new Item[10];
+    private Product[] products  =   new Product[10];
+    private Service[] services  =   new Service[10];
 
     //  Item product and service checkout list
     private Item[] checkout     =   new Item[20];
