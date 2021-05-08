@@ -12,7 +12,6 @@ class App
     //  Item product and services array
     private Item[] items    =   new Item[10];
 
-    
     //  Default constructor
     App() 
     {
@@ -40,4 +39,15 @@ class App
     //  Start GUI
     public void startGui() {}
 
+    //  Add Item
+    public void addItem() {}
+
+    //  Remove Item
+    public void removeItem() {}
+
+    //  Edit Item
+    public void editItem()   {}
+
+    //  Grand Total
+    public float grandTotal() {}
 }
