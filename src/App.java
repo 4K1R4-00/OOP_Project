@@ -22,19 +22,19 @@ class App
     {
         System.out.println("The app has been instantiated");
 
-        Scanner input   =   new Scanner(System.in);
+        Scanner input           =   new Scanner(System.in);
 
         System.out.println("Select application runtime mode  ");
         System.out.println("=================================");
         System.out.println("1. TUI Mode");
         System.out.println("2. GUI Mode");
         System.out.print("Enter Selection: ");
-        int appType     =   input.nextInt();
+        int interfaceType     =   input.nextInt();
 
-        if (appType == interfaceType[0])
+        if (interfaceType == this.interfaceType[0])
             startTui();
 
-        if (appType == interfaceType[1])
+        if (interfaceType == this.interfaceType[1])
             startGui();
 
         input.close();
