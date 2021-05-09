@@ -4,37 +4,51 @@ class Product extends Item
     String pCategory;
     int pQuantity;
 
-    Product(){
-
+    Product(String productName, double productCost)
+    {
+        super(productName, productCost);
     }
 
-    Product(char pGenderType, String pCategory, int pQuantity){
-        this.pGenderType    =   pGenderType;
-        this.pCategory      =   pCategory;
-        this.pQuantity      =   pQuantity;
+    Product(String productName, 
+            String productCategory, 
+            double productCost, 
+            char productGenderType, 
+            int productQuantity
+            )
+    {
+        super(productName, productCost);
+        this.pGenderType    =   productGenderType;
+        this.pCategory      =   productCategory;
+        this.pQuantity      =   productQuantity;
     }
 
-    public void updateGenderType(char updateItemType){
+    public void updateGenderType(char updateItemType)
+    {
         this.pGenderType    =   updateItemType;
     }
 
-    public void updateCategory(String updateItemCategory){
+    public void updateCategory(String updateItemCategory)
+    {
         this.pCategory      =   updateItemCategory;
     }
 
-    public void updateQuantity(int updateQuantity){
+    public void updateQuantity(int updateQuantity)
+    {
         this.pQuantity      =   updateQuantity;
     }
 
-    public char getGenderType(){
+    public char getGenderType()
+    {
         return pGenderType;
     }
 
-    public String getCategory(){
+    public String getCategory()
+    {
         return pCategory;
     }
 
-    public int getpQuantity(){
+    public int getpQuantity()
+    {
         return pQuantity;
     }
 

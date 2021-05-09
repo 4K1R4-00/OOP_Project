@@ -11,12 +11,13 @@ class Item
     private String name;
 
     //  Item cost
-    private float cost;
+    private double cost;
 
     //  Default constructor
     Item () {}
 
-    Item (String itemName, float itemCost){
+    Item (String itemName, double itemCost)
+    {
         this.name   =   itemName;
         this.cost   =   itemCost;
     }
@@ -26,19 +27,23 @@ class Item
      *
      *  @return void
      */
-    public void updateCost(float updatedItemCost){
+    public void updateCost(double updatedItemCost)
+    {
         this.cost   =   updatedItemCost;
     }
 
-    public void updateName(String updateItemName){
+    public void updateName(String updateItemName)
+    {
         this.name   =   updateItemName;
     }
 
-    public float getCost(){
+    public double getCost()
+    {
         return this.cost;
     }
 
-    public String getName(){
+    public String getName()
+    {
         return this.name;
     }
 }
