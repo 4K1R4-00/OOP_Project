@@ -50,7 +50,7 @@ class App
     public void startGui() {}
 
     //  Add item to product list
-    public void addItem(String type) 
+    public void addItem(String type)
     {
         if (type == "product") {}
 
@@ -61,7 +61,7 @@ class App
     /*
      *  @params int     index
      *  @params String  type
-     *  
+     *
      *  @brief
      *  Remove item in arraylist according to the item type, and index number associated.
      *
@@ -86,9 +86,19 @@ class App
      *
      *  @return void
      */
-    public void editItem(int index, String type) 
+    public void editItem(int index, String type, String itemName, double itemCost)
     {
+        if (type == "product")
+        {
+            products.get(index).updateName(itemName);
+            products.get(index).updateCost(itemCost);
+        }
 
+        if (type == "service")
+        {
+            services.get(index).updateName(itemName);
+            services.get(index).updateCost(itemCost);
+        }
     }
 
     //  Grand Total
