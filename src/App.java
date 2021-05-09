@@ -50,7 +50,12 @@ class App
     public void startGui() {}
 
     //  Add item to product list
-    public void addItem() {}
+    public void addItem(String type) 
+    {
+        if (type == "product") {}
+
+        if (type == "service") {}
+    }
 
     //  Remove item from product list
     /*
@@ -65,18 +70,23 @@ class App
     public void removeItem(int index, String type)
     {
         if (type == "product")
-        {
             products.remove(index);
-        }
 
         if (type == "service")
-        {
             services.remove(index);
-        }
     }
 
-    //  Edit item from product list
-    public void editItem(int index) 
+    /*
+     *  @params int     index
+     *  @params String  type
+     *
+     *  @brief
+     *  Edit the item in the ArrayList according to the item type and index number associated.
+     *  Then use the provided arguments to edit the chosen ArrayList index.
+     *
+     *  @return void
+     */
+    public void editItem(int index, String type) 
     {
 
     }
