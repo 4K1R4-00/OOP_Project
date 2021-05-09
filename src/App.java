@@ -3,6 +3,7 @@
  *
  */
 import java.util.Scanner;
+import java.util.ArrayList;
 
 class App
 {
@@ -10,8 +11,8 @@ class App
     private int[] interfaceType = {1, 2};
 
     //  Current product and item catelog list
-    private Product[] products  =   new Product[10];
-    private Service[] services  =   new Service[10];
+    private ArrayList<Product> products     =   new ArrayList<Product>(5);
+    private ArrayList<Service> services     =   new ArrayList<Service>(5);
 
     //  Item product and service checkout list
     private Item[] checkout     =   new Item[20];
@@ -52,10 +53,33 @@ class App
     public void addItem() {}
 
     //  Remove item from product list
-    public void removeItem() {}
+    /*
+     *  @params int     index
+     *  @params String  type
+     *  
+     *  @brief
+     *  Remove item in arraylist according to the item type, and index number associated.
+     *
+     *  @return void
+     */
+    public void removeItem(int index, String type)
+    {
+        if (type == "product")
+        {
+            products.remove(index);
+        }
+
+        if (type == "service")
+        {
+            services.remove(index);
+        }
+    }
 
     //  Edit item from product list
-    public void editItem() {}
+    public void editItem(int index) 
+    {
+
+    }
 
     //  Grand Total
     //public float grandTotal() {}
@@ -70,50 +94,50 @@ class App
      */
     public void runTest()
     {
+        System.out.println("\nRunning Product Tests");
+        System.out.println("==============================");
+
         // fill test data
         testProductData();
 
-        for(int i = 0; i < products.length; i++)
+        for(int i = 0; i < products.size(); i++)
         {
-            System.out.print("product: " + products[i].getName());
-            System.out.println("  cost   : " + products[i].getCost());
+            System.out.print("product: " + products.get(i).getName());
+            System.out.println("  cost   : " + products.get(i).getCost());
         }
+
+        System.out.println("\nTest 1: removeItem() test");
+
+        removeItem(1, "product");
+
+        for(int i = 0; i < products.size(); i++)
+        {
+            System.out.print("product: " + products.get(i).getName());
+            System.out.println("  cost   : " + products.get(i).getCost());
+        }
+
+        System.out.println("\nRunning Service Test");
+        System.out.println("==============================");
 
         // fill test data
         testServiceData();
 
-        for(int i = 0; i < services.length; i++)
+        for(int i = 0; i < services.size(); i++)
         {
-            System.out.print("service: " + services[i].getName());
-            System.out.println("  cost   : " + services[i].getCost());
+            System.out.print("service: " + services.get(i).getName());
+            System.out.println("  cost   : " + services.get(i).getCost());
         }
     }
 
     public void testProductData()
     {
-        products[0]     =   new Product("Shampoo", 10.00);
-        products[1]     =   new Product("Shampoo", 10.00);
-        products[2]     =   new Product("Shampoo", 10.00);
-        products[3]     =   new Product("Shampoo", 10.00);
-        products[4]     =   new Product("Shampoo", 10.00);
-        products[5]     =   new Product("Shampoo", 10.00);
-        products[6]     =   new Product("Shampoo", 10.00);
-        products[7]     =   new Product("Shampoo", 10.00);
-        products[8]     =   new Product("Shampoo", 10.00);
-        products[9]     =   new Product("Shampoo", 10.00);
+        products.add(new Product("Shampoo", 10.00));
+        products.add(new Product("Pomade ", 20.00));
+        products.add(new Product("Gel    ", 15.00));
     }
 
     public void testServiceData()
     {
-        services[0]     =   new Service("Haircut", 20.00);
-        services[1]     =   new Service("Haircut", 20.00);
-        services[2]     =   new Service("Haircut", 20.00);
-        services[3]     =   new Service("Haircut", 20.00);
-        services[4]     =   new Service("Haircut", 20.00);
-        services[5]     =   new Service("Haircut", 20.00);
-        services[6]     =   new Service("Haircut", 20.00);
-        services[7]     =   new Service("Haircut", 20.00);
-        services[8]     =   new Service("Haircut", 20.00);
-        services[9]     =   new Service("Haircut", 20.00);
+        services.add(new Service("Haircut", 30.00));
     }
 }
