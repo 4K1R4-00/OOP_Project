@@ -26,9 +26,15 @@ class GUI extends JFrame
 
     private JPanel checkoutPanel        =   new JPanel();
 
-
     GUI()
     {
+        //  Default gui settings
+        this.setTitle("Salon App");
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(1080, 450);
+        this.setVisible(true);
+
         //  Set the layout of the frame
         setLayout(frameLayout);
 
@@ -57,23 +63,6 @@ class GUI extends JFrame
         checkoutPanel.setBackground(Color.green);
         this.add(checkoutPanel, BorderLayout.CENTER);
 
-        /*
-        this.infoPanel.setBackground(Color.red);
-
-        this.itemPanel.setBackground(Color.green);
-        this.itemPanel.setLayout(itemLayout);
-
-        this.buttonItemPanel.add(new JPanel(itemButtonPanel));
-        this.buttonItemPanel.add();
-
-        this.itemPanel.add(buttonItemPanel);
-
-        this.checkoutPanel.setBackground(Color.blue);
-
-        this.add(infoPanel, BorderLayout.NORTH);
-        this.add(itemPanel, BorderLayout.CENTER);
-        this.add(checkoutPanel, BorderLayout.EAST);
-        */
     }
 
     GUI(ArrayList<Product> products, ArrayList<Service> services)
@@ -95,15 +84,5 @@ class GUI extends JFrame
         }
 
         //  Loop through services
-    }
-
-    public static void main(String[] args)
-    {
-        JFrame gui      =   new GUI();
-        gui.setTitle("GUI test");
-        gui.setLocationRelativeTo(null);
-        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setSize(1080, 500);
-        gui.setVisible(true);
     }
 }

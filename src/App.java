@@ -47,7 +47,10 @@ class App
     }
 
     //  Start GUI
-    public void startGui() {}
+    public void startGui() 
+    {
+        GUI guiInterface  =   new GUI();
+    }
 
     //  Add item to product list
     public void addItem(String type)
