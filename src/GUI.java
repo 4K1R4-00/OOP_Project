@@ -40,9 +40,7 @@ class GUI extends JFrame
 
         for (int i = 0; i < 15; i++)
         {
-            //JPanel itemButtonPanel  =   new JPanel(new BorderLayout(3, 5));
             JButton itemButton      =   new JButton("Item");
-            //itemButtonPanel.add(itemButton, BorderLayout.CENTER);
 
             itemPanel.add(itemButton);
         }
