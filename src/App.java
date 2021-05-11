@@ -46,10 +46,21 @@ class App
         runTest();
     }
 
-    //  Start GUI
-    public void startGui() 
+    /*
+     *  @params void
+     *
+     *  @brief
+     *  This method instantiates the GUI class and starts the GUI.
+     *
+     *  @returns void
+     */
+    public void startGui()
     {
+        testProductData();
+        testServiceData();
+
         GUI guiInterface  =   new GUI();
+        // GUI guiInterface     =   new GUI(products, services);
     }
 
     //  Add item to product list
