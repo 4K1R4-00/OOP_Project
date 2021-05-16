@@ -59,7 +59,7 @@ class App
         testProductData();
         testServiceData();
 
-        GUI guiInterface  =   new GUI();
+        GUI guiInterface  =   new GUI(products, services);
         // GUI guiInterface     =   new GUI(products, services);
     }
 
