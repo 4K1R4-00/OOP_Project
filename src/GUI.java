@@ -4,8 +4,15 @@ import javax.swing.JLabel;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import java.awt.Color;
 
@@ -16,7 +23,8 @@ class GUI extends JFrame
     private GridLayout itemLayout       =   new GridLayout(0, 3, 5, 5);
     private BorderLayout frameLayout    =   new BorderLayout(5, 10);
 
-    private JPanel infoPanel            =   new JPanel();
+    private JMenuItem infoButton        =   new JMenuItem("Information");
+    private JMenuItem settingButton     =   new JMenuItem("Setting");
 
     private JPanel itemPanel            =   new JPanel(itemLayout);
     private JScrollPane scrollableItem  =   new JScrollPane(itemPanel,
@@ -30,36 +38,8 @@ class GUI extends JFrame
     private ArrayList<Product> products;
     private ArrayList<Service> services;
 
-    GUI()
-    {
-        //  Default gui settings
-        this.setTitle("Salon App");
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1080, 450);
-        this.setVisible(true);
-
-        //  Set the layout of the frame
-        this.setLayout(frameLayout);
-
-        for (int i = 0; i < 15; i++)
-        {
-            JButton itemButton      =   new JButton("Item");
-
-            itemPanel.add(itemButton);
-        }
-
-        infoPanel.add(new JButton("Info"));
-        infoPanel.add(new JButton("Setting"));
-        this.add(infoPanel, BorderLayout.NORTH);
-
-        scrollableItem.setBackground(Color.red);
-        this.add(scrollableItem, BorderLayout.CENTER);
-
-        checkoutPanel.add(new JLabel("Salon Checkout Panel"));
-        checkoutPanel.setBackground(Color.green);
-        this.add(checkoutPanel, BorderLayout.EAST);
-    }
+    // Default constructor
+    GUI() {}
 
     GUI(ArrayList<Product> products, ArrayList<Service> services)
     {
@@ -77,11 +57,18 @@ class GUI extends JFrame
         //  Set the layout of the frame
         this.setLayout(frameLayout);
 
-        createItemListing(this.products, this.services);
+        //  Instantiate a menubar
+        JMenuBar menuBar    =   new JMenuBar();
 
-        infoPanel.add(new JButton("Info"));
-        infoPanel.add(new JButton("Setting"));
-        this.add(infoPanel, BorderLayout.NORTH);
+        settingButton.addActionListener(new MenuListener());
+        infoButton.addActionListener(new MenuListener());
+        menuBar.add(infoButton);
+        menuBar.add(settingButton);
+
+        this.setJMenuBar(menuBar);
+
+        //  Create the list of item available buttons.
+        createItemListing(this.products, this.services);
 
         scrollableItem.setBackground(Color.red);
         this.add(scrollableItem, BorderLayout.CENTER);
@@ -114,9 +101,21 @@ class GUI extends JFrame
         }
     }
 
-
-    private void addItemButtons()
+    class MenuListener implements ActionListener
     {
+        public void actionPerformed(ActionEvent e)
+        {
+            if (e.getSource() == infoButton)
+                System.out.println("The infobutton has been pressed");
+            else if (e.getSource() == settingButton)
+                System.out.println("The settingButton has been pressed");
+        }
+    }
 
+    class SettingFrame extends JFrame
+    {
+        SettingFrame()
+        {
+        }
     }
 }
