@@ -38,15 +38,28 @@ class GUI extends JFrame
     private ArrayList<Product> products;
     private ArrayList<Service> services;
 
+    private ArrayList<Item> checkout;
+
     // Default constructor
     GUI() {}
 
     GUI(ArrayList<Product> products, ArrayList<Service> services)
     {
-
         this.products   =   products;
         this.services   =   services;
+    }
 
+    /*
+     *  @param  void
+     *
+     *  @brief
+     *  Starts the swing GUI application.
+     *  Creates the window and assigns the proper layout to the frame.
+     *
+     *  @return void
+     */
+    public void start()
+    {
         //  Default gui settings
         this.setTitle("Salon App");
         this.setLocationRelativeTo(null);
@@ -89,6 +102,7 @@ class GUI extends JFrame
             JButton itemButton      =   new JButton(products.get(i).getName());
 
             itemButton.setActionCommand(String.valueOf(i));
+            itemButton.addActionListener(new ItemListener());
 
             itemPanel.add(itemButton);
         }
@@ -100,19 +114,42 @@ class GUI extends JFrame
             JButton itemButton      =   new JButton(services.get(i - tempPadding).getName());
 
             itemButton.setActionCommand(String.valueOf(i));
+            itemButton.addActionListener(new ItemListener());
 
             itemPanel.add(itemButton);
         }
     }
 
+    /*
+     *  @brief
+     *  The MenuListener class listens for events that occur in the menubar.
+     */
     class MenuListener implements ActionListener
     {
-        public void actionPerformed(ActionEvent e)
+        public void actionPerformed(ActionEvent ae)
         {
-            if (e.getSource() == infoButton)
+            if (ae.getSource() == infoButton)
                 System.out.println("The infobutton has been pressed");
-            else if (e.getSource() == settingButton)
+            else if (ae.getSource() == settingButton)
                 System.out.println("The settingButton has been pressed");
+        }
+    }
+
+    /*
+     *  @brief
+     *  The ItemListener listens to the events in the item menu.
+     *
+     *  It then compares the value assigned to the action event of the button click,
+     *  with the value of the size of item based on category.
+     */
+    class ItemListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent ae)
+        {
+            int itemValue   =   Integer.parseInt(ae.getActionCommand());
+
+            System.out.println("The item value is: " + itemValue);
+
         }
     }
 
