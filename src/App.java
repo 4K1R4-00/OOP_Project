@@ -173,5 +173,6 @@ class App
     public void testServiceData()
     {
         services.add(new Service("Haircut", 30.00));
+        services.add(new Service("Hair Perm", 60.00));
     }
 }
