@@ -32,16 +32,16 @@ class App
         int interfaceType     =   input.nextInt();
 
         if (interfaceType == this.interfaceType[0])
-            startTui();
+            Tui();
 
         if (interfaceType == this.interfaceType[1])
-            startGui();
+            Gui();
 
         input.close();
     }
 
     //  Start TUI
-    public void startTui()
+    public void Tui()
     {
         runTest();
     }
@@ -54,13 +54,13 @@ class App
      *
      *  @returns void
      */
-    public void startGui()
+    public void Gui()
     {
         testProductData();
         testServiceData();
 
         GUI guiInterface  =   new GUI(products, services);
-        // GUI guiInterface     =   new GUI(products, services);
+        guiInterface.start();
     }
 
     //  Add item to product list
@@ -168,6 +168,7 @@ class App
         products.add(new Product("Shampoo", 10.00));
         products.add(new Product("Pomade ", 20.00));
         products.add(new Product("Gel    ", 15.00));
+        products.add(new Product("Conditioner", 11.00));
     }
 
     public void testServiceData()
