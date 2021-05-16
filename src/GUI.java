@@ -57,14 +57,18 @@ class GUI extends JFrame
         //  Set the layout of the frame
         this.setLayout(frameLayout);
 
-        //  Instantiate a menubar
+        //  Menu bar
         JMenuBar menuBar    =   new JMenuBar();
+        JMenu systemMenu    =   new JMenu("System");
 
         settingButton.addActionListener(new MenuListener());
         infoButton.addActionListener(new MenuListener());
-        menuBar.add(infoButton);
-        menuBar.add(settingButton);
 
+        systemMenu.add(infoButton);
+        systemMenu.add(settingButton);
+        menuBar.add(systemMenu);
+
+        //  Set the menu bar
         this.setJMenuBar(menuBar);
 
         //  Create the list of item available buttons.
