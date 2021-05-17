@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
@@ -90,8 +91,8 @@ class GUI extends JFrame
         scrollableItem.setBackground(Color.red);
         this.add(scrollableItem, BorderLayout.CENTER);
 
+        //  Set checkout
         checkoutPanel.add(new JLabel("Salon Checkout Panel"));
-        checkoutPanel.setBackground(Color.green);
         this.add(checkoutPanel, BorderLayout.EAST);
     }
 
@@ -141,6 +142,9 @@ class GUI extends JFrame
      *
      *  It then compares the value assigned to the action event of the button click,
      *  with the value of the size of item based on category.
+     *
+     *  once the category has been identified, prompt for a dialog box of quantity,
+     *  if the item is a product.
      */
     class ItemListener implements ActionListener
     {
@@ -148,15 +152,82 @@ class GUI extends JFrame
         {
             int itemValue   =   Integer.parseInt(ae.getActionCommand());
 
-            System.out.println("The item value is: " + itemValue);
+            if (itemValue < products.size())
+            {
+                System.out.println("The item value of [" + itemValue + "] is a product.");
+                ItemModalWindow productDialog   =   new ItemModalWindow(products.get(itemValue));
+            }
+            else if (itemValue >= products.size())
+            {
+                System.out.println("The item value of [" + itemValue + "] is a service.");
 
+                int serviceID   =   itemValue - products.size();
+                ItemModalWindow serviceDialog   =   new ItemModalWindow(services.get(serviceID));
+            }
         }
     }
 
-    class SettingFrame extends JFrame
+    /*
+     *  @brief
+     *
+     *  The ItemModalWindow is the dialog window that appears after a
+     *  product or service is selected, in order to ensure the quantity and cost.
+     *
+     */
+    class ItemModalWindow
     {
-        SettingFrame()
+        private JDialog itemWindow;
+        private JFrame itemFrame;
+
+        ItemModalWindow(Product product)
         {
+            itemFrame           =   new JFrame();
+
+            JButton exitButton  =   new JButton("Exit");
+            JLabel itemLabel    =   new JLabel(product.getName());
+
+            itemFrame.setLayout(new BorderLayout());
+            itemFrame.setSize(300, 200);
+            itemFrame.setVisible(true);
+
+            itemFrame.add(itemLabel, BorderLayout.NORTH);
+            itemFrame.add(exitButton, BorderLayout.CENTER);
+
+            itemWindow          =   new JDialog(itemFrame, product.getName(), true);
+
+            exitButton.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent ae)
+                {
+                    itemFrame.setVisible(false);
+                }
+            });
+        }
+
+        ItemModalWindow(Service service)
+        {
+            itemFrame           =   new JFrame();
+
+            JButton exitButton  =   new JButton("Exit");
+            JLabel itemLabel    =   new JLabel(service.getName());
+
+            itemFrame.setLayout(new BorderLayout());
+            itemFrame.setSize(300, 200);
+            itemFrame.setVisible(true);
+
+            itemFrame.add(itemLabel, BorderLayout.NORTH);
+            itemFrame.add(exitButton, BorderLayout.CENTER);
+
+            itemWindow      =   new JDialog(itemFrame, service.getName(), true);
+
+            exitButton.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent ae)
+                {
+                    itemFrame.setVisible(false);
+                }
+            });
         }
     }
+
 }
