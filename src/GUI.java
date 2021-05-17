@@ -96,9 +96,22 @@ class GUI extends JFrame
         this.add(checkoutPanel, BorderLayout.EAST);
     }
 
+    /*
+     *  @params     Product[]   products
+     *  @params     Service[]   services
+     *
+     *  @brief
+     *  The method creates the buttons for each item, and assigns a value to the button.
+     *  The button for products is based on the size of the array.
+     *  While the button for services is based on the maximum size of the products array.
+     *
+     *  @return     void
+     */
     private void createItemListing(ArrayList<Product> products, ArrayList<Service> services)
     {
-        for (int i = 0; i < products.size(); i++)
+        int productMaxSize  =   products.size();
+
+        for (int i = 0; i < productMaxSize; i++)
         {
             JButton itemButton      =   new JButton(products.get(i).getName());
 
@@ -109,10 +122,9 @@ class GUI extends JFrame
         }
 
         //  The starting value of the iterator is after the size of products array.
-        for (int i = products.size(); i < (services.size() + products.size()); i++)
+        for (int i = productMaxSize; i < (services.size() + productMaxSize); i++)
         {
-            int tempPadding         =   products.size();
-            JButton itemButton      =   new JButton(services.get(i - tempPadding).getName());
+            JButton itemButton      =   new JButton(services.get(i - productMaxSize).getName());
 
             itemButton.setActionCommand(String.valueOf(i));
             itemButton.addActionListener(new ItemListener());
@@ -150,18 +162,18 @@ class GUI extends JFrame
     {
         public void actionPerformed(ActionEvent ae)
         {
-            int itemValue   =   Integer.parseInt(ae.getActionCommand());
+            int itemID   =   Integer.parseInt(ae.getActionCommand());
+            int productMaxSize  =   products.size();
 
-            if (itemValue < products.size())
+            if (itemID < productMaxSize)
             {
-                System.out.println("The item value of [" + itemValue + "] is a product.");
-                ItemModalWindow productDialog   =   new ItemModalWindow(products.get(itemValue));
+                int productID   =   itemID;
+                ItemModalWindow productDialog   =   new ItemModalWindow(products.get(productID));
             }
-            else if (itemValue >= products.size())
+            else if (itemID >= productMaxSize)
             {
-                System.out.println("The item value of [" + itemValue + "] is a service.");
+                int serviceID   =   itemID - productMaxSize;
 
-                int serviceID   =   itemValue - products.size();
                 ItemModalWindow serviceDialog   =   new ItemModalWindow(services.get(serviceID));
             }
         }
@@ -178,24 +190,38 @@ class GUI extends JFrame
     {
         private JDialog itemWindow;
         private JFrame itemFrame;
+        private JPanel modalButton;
+
+        private Service service;
+        private Product product;
 
         ItemModalWindow(Product product)
         {
+            this.product        =   product;
+
             itemFrame           =   new JFrame();
 
-            JButton exitButton  =   new JButton("Exit");
-            JLabel itemLabel    =   new JLabel(product.getName());
+            JLabel itemLabel    =   new JLabel(this.product.getName());
+
+            modalButton         =   new JPanel(new GridLayout(1, 2));
+            JButton cancel      =   new JButton("Cancel");
+            JButton confirm     =   new JButton("Confirm");
+
+            modalButton.add(cancel);
+            modalButton.add(confirm);
 
             itemFrame.setLayout(new BorderLayout());
             itemFrame.setSize(300, 200);
             itemFrame.setVisible(true);
+            itemFrame.setLocationRelativeTo(null);
+            itemFrame.setAlwaysOnTop(true);
 
             itemFrame.add(itemLabel, BorderLayout.NORTH);
-            itemFrame.add(exitButton, BorderLayout.CENTER);
+            itemFrame.add(modalButton, BorderLayout.SOUTH);
 
-            itemWindow          =   new JDialog(itemFrame, product.getName(), true);
+            itemWindow          =   new JDialog(itemFrame, this.product.getName(), true);
 
-            exitButton.addActionListener(new ActionListener()
+            cancel.addActionListener(new ActionListener()
             {
                 public void actionPerformed(ActionEvent ae)
                 {
@@ -206,21 +232,27 @@ class GUI extends JFrame
 
         ItemModalWindow(Service service)
         {
+            this.service        =   service;
+
             itemFrame           =   new JFrame();
 
-            JButton exitButton  =   new JButton("Exit");
-            JLabel itemLabel    =   new JLabel(service.getName());
+            JLabel itemLabel    =   new JLabel(this.service.getName());
+
+            modalButton         =   new JPanel(new GridLayout(1, 2));
+            JButton cancel      =   new JButton("Cancel");
+            JButton confirm     =   new JButton("Confirm");
 
             itemFrame.setLayout(new BorderLayout());
             itemFrame.setSize(300, 200);
             itemFrame.setVisible(true);
+            itemFrame.setLocationRelativeTo(null);
 
             itemFrame.add(itemLabel, BorderLayout.NORTH);
-            itemFrame.add(exitButton, BorderLayout.CENTER);
+            itemFrame.add(modalButton, BorderLayout.SOUTH);
 
-            itemWindow      =   new JDialog(itemFrame, service.getName(), true);
+            itemWindow          =   new JDialog(itemFrame, service.getName(), true);
 
-            exitButton.addActionListener(new ActionListener()
+            cancel.addActionListener(new ActionListener()
             {
                 public void actionPerformed(ActionEvent ae)
                 {
