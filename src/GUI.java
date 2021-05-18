@@ -304,10 +304,16 @@ class GUI extends JFrame
 
         public int decProductQuantity(int productQuantity)
         {
-            productQuantity--;
-            quantity.setText(String.valueOf(productQuantity));
+            if (productQuantity > 1)
+            {
+                productQuantity--;
+                quantity.setText(String.valueOf(productQuantity));
 
-            return productQuantity;
+                return productQuantity;
+            } else 
+            {
+                return 1;
+            }
         }
     }
 
