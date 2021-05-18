@@ -195,15 +195,17 @@ class GUI extends JFrame
         private JFrame itemFrame;
         private JPanel modalButton;
         private JLabel quantity;
+        private int quantityCounter;
 
         private Service service;
         private Product product;
 
         ItemModalWindow(Product product)
         {
-            this.product        =   product;
+            this.product            =   product;
+            this.quantityCounter    =   1;
 
-            itemModalInit(this.product.getName(), this.product.getCost(), this.product.getpQuantity());
+            itemModalInit(this.product.getName(), this.product.getCost(), quantityCounter);
         }
 
         ItemModalWindow(Service service)
@@ -229,7 +231,7 @@ class GUI extends JFrame
             //  Required for double to String conversion.
             itemInfo.add(new JLabel(String.valueOf(itemCost), SwingConstants.CENTER));
 
-            //  Quantity button
+            //  If the item is a product with a quantity counter.
             if (itemQty > 0)
             {
                 JButton removeQty   =   new JButton("-");
@@ -242,15 +244,15 @@ class GUI extends JFrame
                 {
                     public void actionPerformed(ActionEvent ae)
                     {
-                        incProductQuantity(itemQty);
-                    };
+                        quantityCounter     =   incProductQuantity(quantityCounter);
+                    }
                 });
 
                 removeQty.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent ae)
                     {
-                        //decProductQuantity(this.product.setQuantity());
+                        quantityCounter     =   decProductQuantity(quantityCounter);
                     }
                 });
 
@@ -292,10 +294,20 @@ class GUI extends JFrame
             itemWindow          =   new JDialog(itemFrame, itemName, true);
         }
 
-        public void incProductQuantity(int productQuantity)
+        public int incProductQuantity(int productQuantity)
         {
             productQuantity++;
             quantity.setText(String.valueOf(productQuantity));
+
+            return productQuantity;
+        }
+
+        public int decProductQuantity(int productQuantity)
+        {
+            productQuantity--;
+            quantity.setText(String.valueOf(productQuantity));
+
+            return productQuantity;
         }
     }
 
