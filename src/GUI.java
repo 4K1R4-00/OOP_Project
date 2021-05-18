@@ -201,7 +201,15 @@ class GUI extends JFrame
 
             itemFrame           =   new JFrame();
 
-            JLabel itemLabel    =   new JLabel(this.product.getName());
+            JPanel itemModal    =   new JPanel(new GridLayout(0, 2));
+
+            itemModal.add(new JLabel("Item Name: "));
+            itemModal.add(new JLabel(this.product.getName()));
+
+            itemModal.add(new JLabel("Cost: "));
+
+            String itemName     =   String.valueOf(this.product.getCost());
+            itemModal.add(new JLabel(itemName));
 
             modalButton         =   new JPanel(new GridLayout(1, 2));
             JButton cancel      =   new JButton("Cancel");
@@ -216,7 +224,7 @@ class GUI extends JFrame
             itemFrame.setLocationRelativeTo(null);
             itemFrame.setAlwaysOnTop(true);
 
-            itemFrame.add(itemLabel, BorderLayout.NORTH);
+            itemFrame.add(itemModal, BorderLayout.NORTH);
             itemFrame.add(modalButton, BorderLayout.SOUTH);
 
             itemWindow          =   new JDialog(itemFrame, this.product.getName(), true);
@@ -236,7 +244,10 @@ class GUI extends JFrame
 
             itemFrame           =   new JFrame();
 
-            JLabel itemLabel    =   new JLabel(this.service.getName());
+            JPanel itemModal    =   new JPanel(new GridLayout(2, 3));
+
+            itemModal.add(new JLabel("Item Name: "));
+            itemModal.add(new JLabel(this.service.getName()));
 
             modalButton         =   new JPanel(new GridLayout(1, 2));
             JButton cancel      =   new JButton("Cancel");
@@ -247,7 +258,7 @@ class GUI extends JFrame
             itemFrame.setVisible(true);
             itemFrame.setLocationRelativeTo(null);
 
-            itemFrame.add(itemLabel, BorderLayout.NORTH);
+            itemFrame.add(itemModal, BorderLayout.CENTER);
             itemFrame.add(modalButton, BorderLayout.SOUTH);
 
             itemWindow          =   new JDialog(itemFrame, service.getName(), true);
