@@ -43,7 +43,11 @@ class App
     //  Start TUI
     public void Tui()
     {
-        runTest();
+        //  runTest();
+        testProductData();
+        testServiceData();
+        TUI tuiInterface    =   new TUI(products, services);
+        tuiInterface.start();
     }
 
     /*
