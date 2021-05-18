@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -202,16 +203,36 @@ class GUI extends JFrame
 
             itemFrame           =   new JFrame();
 
+            JPanel itemPanel    =   new JPanel(new GridLayout(0, 1));
             JPanel itemModal    =   new JPanel(new GridLayout(0, 2));
 
-            itemModal.add(new JLabel("Item Name: "));
-            itemModal.add(new JLabel(this.product.getName()));
+            itemModal.add(new JLabel("Item Name: ", SwingConstants.CENTER));
+            itemModal.add(new JLabel(this.product.getName(), SwingConstants.CENTER));
 
-            itemModal.add(new JLabel("Cost: "));
+            itemModal.add(new JLabel("Cost: ", SwingConstants.CENTER));
 
+            //  Required for double to String conversion.
             String itemName     =   String.valueOf(this.product.getCost());
-            itemModal.add(new JLabel(itemName));
+            itemModal.add(new JLabel(itemName, SwingConstants.CENTER));
 
+            //  Quantity button
+            JButton removeQty   =   new JButton("-");
+
+            String itemQty      =   String.valueOf(this.product.getpQuantity());
+            JLabel quantity     =   new JLabel(itemQty, SwingConstants.CENTER);
+
+            JButton addQty      =   new JButton("+");
+
+            JPanel itemQtyModal =   new JPanel(new GridLayout(0, 3));
+
+            itemQtyModal.add(removeQty);
+            itemQtyModal.add(quantity);
+            itemQtyModal.add(addQty);
+
+            itemPanel.add(itemModal);
+            itemPanel.add(itemQtyModal);
+
+            //  Buttons for cancel and confirm item
             modalButton         =   new JPanel(new GridLayout(1, 2));
             JButton cancel      =   new JButton("Cancel");
             JButton confirm     =   new JButton("Confirm");
@@ -221,12 +242,13 @@ class GUI extends JFrame
 
             itemFrame.setLayout(new BorderLayout());
             itemFrame.setSize(300, 200);
-            itemFrame.setVisible(true);
             itemFrame.setLocationRelativeTo(null);
             itemFrame.setAlwaysOnTop(true);
 
-            itemFrame.add(itemModal, BorderLayout.NORTH);
+            itemFrame.add(itemPanel, BorderLayout.CENTER);
             itemFrame.add(modalButton, BorderLayout.SOUTH);
+
+            itemFrame.setVisible(true);
 
             itemWindow          =   new JDialog(itemFrame, this.product.getName(), true);
 
