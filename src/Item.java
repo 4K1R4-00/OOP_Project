@@ -19,6 +19,12 @@ class Item
     //  Default constructor
     Item () {}
 
+    Item(String itemName, double itemCost)
+    {
+        this.name       =   itemName;
+        this.cost       =   itemCost;
+    }
+
     Item (String itemName, double itemCost, int quantity)
     {
         this.name       =   itemName;
