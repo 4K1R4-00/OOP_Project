@@ -40,7 +40,7 @@ class GUI extends JFrame
     private ArrayList<Product> products;
     private ArrayList<Service> services;
 
-    private ArrayList<Item> checkout;
+    private ArrayList<Item> checkout    =   new ArrayList<Item>(5);
 
     // Default constructor
     GUI() {}
@@ -111,11 +111,11 @@ class GUI extends JFrame
      */
     private void createItemListing(ArrayList<Product> products, ArrayList<Service> services)
     {
-        int productMaxSize  =   products.size();
+        int productMaxSize      =   products.size();
 
         for (int i = 0; i < productMaxSize; i++)
         {
-            JButton itemButton      =   new JButton(products.get(i).getName());
+            JButton itemButton  =   new JButton(products.get(i).getName());
 
             itemButton.setActionCommand(String.valueOf(i));
             itemButton.addActionListener(new ItemListener());
@@ -126,7 +126,7 @@ class GUI extends JFrame
         //  The starting value of the iterator is after the size of products array.
         for (int i = productMaxSize; i < (services.size() + productMaxSize); i++)
         {
-            JButton itemButton      =   new JButton(services.get(i - productMaxSize).getName());
+            JButton itemButton  =   new JButton(services.get(i - productMaxSize).getName());
 
             itemButton.setActionCommand(String.valueOf(i));
             itemButton.addActionListener(new ItemListener());
@@ -164,7 +164,8 @@ class GUI extends JFrame
     {
         public void actionPerformed(ActionEvent ae)
         {
-            int itemID   =   Integer.parseInt(ae.getActionCommand());
+            //  Get the item identifier
+            int itemID          =   Integer.parseInt(ae.getActionCommand());
             int productMaxSize  =   products.size();
 
             if (itemID < productMaxSize)
@@ -195,6 +196,7 @@ class GUI extends JFrame
         private JFrame itemFrame;
         private JPanel modalButton;
         private JLabel quantity;
+
         private int quantityCounter;
 
         private Service service;
@@ -203,6 +205,8 @@ class GUI extends JFrame
         ItemModalWindow(Product product)
         {
             this.product            =   product;
+
+            //  A product has a minimum of 1 quantity
             this.quantityCounter    =   1;
 
             itemModalInit(this.product.getName(), this.product.getCost(), quantityCounter);
@@ -210,13 +214,26 @@ class GUI extends JFrame
 
         ItemModalWindow(Service service)
         {
-            this.service        =   service;
+            this.service            =   service;
 
-            itemModalInit(this.service.getName(), this.service.getCost(), 0);
+            //  A service is not quantitative like a product, so it is set to 0.
+            this.quantityCounter    =   0;
+
+            itemModalInit(this.service.getName(), this.service.getCost(), quantityCounter);
         }
 
+        /*
+         *  @param  String  itemName
+         *  @param  double  itemCost
+         *  @param  int     itemQty
+         *
+         *  @brief
+         *
+         *  @return void
+         */
         private void itemModalInit(String itemName, double itemCost, int itemQty)
         {
+            //  Create a modelles frame for the itemModal with the item name as the title.
             itemFrame           =   new JFrame(itemName);
 
             JPanel itemPanel    =   new JPanel(new GridLayout(0, 1));
@@ -231,7 +248,7 @@ class GUI extends JFrame
             //  Required for double to String conversion.
             itemInfo.add(new JLabel(String.valueOf(itemCost), SwingConstants.CENTER));
 
-            //  If the item is a product with a quantity counter.
+            //  if item quantity is greater than 1, then it is a product.
             if (itemQty > 0)
             {
                 JButton removeQty   =   new JButton("-");
@@ -281,6 +298,15 @@ class GUI extends JFrame
                 }
             });
 
+            confirm.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent ae)
+                {
+                    setConfirmItem();
+                    itemFrame.setVisible(false);
+                }
+            });
+
             itemFrame.setLayout(new BorderLayout());
             itemFrame.setSize(300, 200);
             itemFrame.setLocationRelativeTo(null);
@@ -294,6 +320,13 @@ class GUI extends JFrame
             itemWindow          =   new JDialog(itemFrame, itemName, true);
         }
 
+        /*
+         *  @params     int     productQuantity
+         *
+         *  @brief
+         *
+         *  @return     int     productQuantity
+         */
         public int incProductQuantity(int productQuantity)
         {
             productQuantity++;
@@ -302,6 +335,13 @@ class GUI extends JFrame
             return productQuantity;
         }
 
+        /*
+         *  @params     int     productQuantity
+         *
+         *  @brief
+         *
+         *  @return     int     productQuantity
+         */
         public int decProductQuantity(int productQuantity)
         {
             if (productQuantity > 1)
@@ -310,9 +350,28 @@ class GUI extends JFrame
                 quantity.setText(String.valueOf(productQuantity));
 
                 return productQuantity;
-            } else 
+            } else
             {
                 return 1;
+            }
+        }
+
+        public void setConfirmItem()
+        {
+            if (quantityCounter >= 1)
+            {
+                this.product.updateQuantity(quantityCounter);
+
+                checkout.add(this.product);
+            } else
+            {
+                checkout.add(this.service);
+            }
+
+            for(int i = 0; i < checkout.size(); i++)
+            {
+                System.out.println(checkout.get(i).getName());
+                System.out.println(checkout.get(i).getCost());
             }
         }
     }
