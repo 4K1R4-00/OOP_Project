@@ -217,7 +217,7 @@ class GUI extends JFrame
 
         private void itemModalInit(String itemName, double itemCost, int itemQty)
         {
-            itemFrame           =   new JFrame();
+            itemFrame           =   new JFrame(itemName);
 
             JPanel itemPanel    =   new JPanel(new GridLayout(0, 1));
             JPanel itemInfo     =   new JPanel(new GridLayout(0, 2));
