@@ -52,6 +52,4 @@ class Product extends Item
         return pQuantity;
     }
 
-
-
 }

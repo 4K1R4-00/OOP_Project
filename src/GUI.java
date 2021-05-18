@@ -40,7 +40,7 @@ class GUI extends JFrame
     private ArrayList<Product> products;
     private ArrayList<Service> services;
 
-    private ArrayList<Item> checkout;
+    private ArrayList<Item> checkout    =   new ArrayList<Item>(5);
 
     // Default constructor
     GUI() {}
@@ -164,6 +164,7 @@ class GUI extends JFrame
     {
         public void actionPerformed(ActionEvent ae)
         {
+            //  Get the item identifier
             int itemID          =   Integer.parseInt(ae.getActionCommand());
             int productMaxSize  =   products.size();
 
@@ -204,6 +205,8 @@ class GUI extends JFrame
         ItemModalWindow(Product product)
         {
             this.product            =   product;
+
+            //  A product has a minimum of 1 quantity
             this.quantityCounter    =   1;
 
             itemModalInit(this.product.getName(), this.product.getCost(), quantityCounter);
@@ -211,9 +214,12 @@ class GUI extends JFrame
 
         ItemModalWindow(Service service)
         {
-            this.service        =   service;
+            this.service            =   service;
 
-            itemModalInit(this.service.getName(), this.service.getCost(), 0);
+            //  A service is not quantitative like a product, so it is set to 0.
+            this.quantityCounter    =   0;
+
+            itemModalInit(this.service.getName(), this.service.getCost(), quantityCounter);
         }
 
         /*
@@ -296,7 +302,8 @@ class GUI extends JFrame
             {
                 public void actionPerformed(ActionEvent ae)
                 {
-
+                    setConfirmItem();
+                    itemFrame.setVisible(false);
                 }
             });
 
@@ -313,6 +320,13 @@ class GUI extends JFrame
             itemWindow          =   new JDialog(itemFrame, itemName, true);
         }
 
+        /*
+         *  @params     int     productQuantity
+         *
+         *  @brief
+         *
+         *  @return     int     productQuantity
+         */
         public int incProductQuantity(int productQuantity)
         {
             productQuantity++;
@@ -321,6 +335,13 @@ class GUI extends JFrame
             return productQuantity;
         }
 
+        /*
+         *  @params     int     productQuantity
+         *
+         *  @brief
+         *
+         *  @return     int     productQuantity
+         */
         public int decProductQuantity(int productQuantity)
         {
             if (productQuantity > 1)
@@ -332,6 +353,25 @@ class GUI extends JFrame
             } else
             {
                 return 1;
+            }
+        }
+
+        public void setConfirmItem()
+        {
+            if (quantityCounter >= 1)
+            {
+                this.product.updateQuantity(quantityCounter);
+
+                checkout.add(this.product);
+            } else
+            {
+                checkout.add(this.service);
+            }
+
+            for(int i = 0; i < checkout.size(); i++)
+            {
+                System.out.println(checkout.get(i).getName());
+                System.out.println(checkout.get(i).getCost());
             }
         }
     }
