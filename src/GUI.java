@@ -232,6 +232,7 @@ class GUI extends JFrame
             itemPanel.add(itemModal);
             itemPanel.add(itemQtyModal);
 
+
             //  Buttons for cancel and confirm item
             modalButton         =   new JPanel(new GridLayout(1, 2));
             JButton cancel      =   new JButton("Cancel");
@@ -239,6 +240,14 @@ class GUI extends JFrame
 
             modalButton.add(cancel);
             modalButton.add(confirm);
+
+            cancel.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent ae)
+                {
+                    itemFrame.setVisible(false);
+                }
+            });
 
             itemFrame.setLayout(new BorderLayout());
             itemFrame.setSize(300, 200);
@@ -252,13 +261,6 @@ class GUI extends JFrame
 
             itemWindow          =   new JDialog(itemFrame, this.product.getName(), true);
 
-            cancel.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent ae)
-                {
-                    itemFrame.setVisible(false);
-                }
-            });
         }
 
         ItemModalWindow(Service service)
@@ -294,6 +296,7 @@ class GUI extends JFrame
                 }
             });
         }
+
     }
 
 }
