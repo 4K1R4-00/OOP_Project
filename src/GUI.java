@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -66,7 +67,6 @@ class GUI extends JFrame
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1080, 450);
-        this.setVisible(true);
 
         //  Set the layout of the frame
         this.setLayout(frameLayout);
@@ -94,6 +94,8 @@ class GUI extends JFrame
         //  Set checkout
         checkoutPanel.add(new JLabel("Salon Checkout Panel"));
         this.add(checkoutPanel, BorderLayout.EAST);
+
+        this.setVisible(true);
     }
 
     /*
@@ -201,8 +203,36 @@ class GUI extends JFrame
 
             itemFrame           =   new JFrame();
 
-            JLabel itemLabel    =   new JLabel(this.product.getName());
+            JPanel itemPanel    =   new JPanel(new GridLayout(0, 1));
+            JPanel itemModal    =   new JPanel(new GridLayout(0, 2));
 
+            itemModal.add(new JLabel("Item Name: ", SwingConstants.CENTER));
+            itemModal.add(new JLabel(this.product.getName(), SwingConstants.CENTER));
+
+            itemModal.add(new JLabel("Cost: ", SwingConstants.CENTER));
+
+            //  Required for double to String conversion.
+            String itemName     =   String.valueOf(this.product.getCost());
+            itemModal.add(new JLabel(itemName, SwingConstants.CENTER));
+
+            //  Quantity button
+            JButton removeQty   =   new JButton("-");
+
+            String itemQty      =   String.valueOf(this.product.getpQuantity());
+            JLabel quantity     =   new JLabel(itemQty, SwingConstants.CENTER);
+
+            JButton addQty      =   new JButton("+");
+
+            JPanel itemQtyModal =   new JPanel(new GridLayout(0, 3));
+
+            itemQtyModal.add(removeQty);
+            itemQtyModal.add(quantity);
+            itemQtyModal.add(addQty);
+
+            itemPanel.add(itemModal);
+            itemPanel.add(itemQtyModal);
+
+            //  Buttons for cancel and confirm item
             modalButton         =   new JPanel(new GridLayout(1, 2));
             JButton cancel      =   new JButton("Cancel");
             JButton confirm     =   new JButton("Confirm");
@@ -212,12 +242,13 @@ class GUI extends JFrame
 
             itemFrame.setLayout(new BorderLayout());
             itemFrame.setSize(300, 200);
-            itemFrame.setVisible(true);
             itemFrame.setLocationRelativeTo(null);
             itemFrame.setAlwaysOnTop(true);
 
-            itemFrame.add(itemLabel, BorderLayout.NORTH);
+            itemFrame.add(itemPanel, BorderLayout.CENTER);
             itemFrame.add(modalButton, BorderLayout.SOUTH);
+
+            itemFrame.setVisible(true);
 
             itemWindow          =   new JDialog(itemFrame, this.product.getName(), true);
 
@@ -236,7 +267,10 @@ class GUI extends JFrame
 
             itemFrame           =   new JFrame();
 
-            JLabel itemLabel    =   new JLabel(this.service.getName());
+            JPanel itemModal    =   new JPanel(new GridLayout(2, 3));
+
+            itemModal.add(new JLabel("Item Name: "));
+            itemModal.add(new JLabel(this.service.getName()));
 
             modalButton         =   new JPanel(new GridLayout(1, 2));
             JButton cancel      =   new JButton("Cancel");
@@ -247,7 +281,7 @@ class GUI extends JFrame
             itemFrame.setVisible(true);
             itemFrame.setLocationRelativeTo(null);
 
-            itemFrame.add(itemLabel, BorderLayout.NORTH);
+            itemFrame.add(itemModal, BorderLayout.CENTER);
             itemFrame.add(modalButton, BorderLayout.SOUTH);
 
             itemWindow          =   new JDialog(itemFrame, service.getName(), true);

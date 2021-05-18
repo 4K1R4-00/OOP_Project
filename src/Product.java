@@ -9,10 +9,10 @@ class Product extends Item
         super(productName, productCost);
     }
 
-    Product(String productName, 
-            String productCategory, 
-            double productCost, 
-            char productGenderType, 
+    Product(String productName,
+            String productCategory,
+            double productCost,
+            char productGenderType,
             int productQuantity
             )
     {
