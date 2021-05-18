@@ -111,11 +111,11 @@ class GUI extends JFrame
      */
     private void createItemListing(ArrayList<Product> products, ArrayList<Service> services)
     {
-        int productMaxSize  =   products.size();
+        int productMaxSize      =   products.size();
 
         for (int i = 0; i < productMaxSize; i++)
         {
-            JButton itemButton      =   new JButton(products.get(i).getName());
+            JButton itemButton  =   new JButton(products.get(i).getName());
 
             itemButton.setActionCommand(String.valueOf(i));
             itemButton.addActionListener(new ItemListener());
@@ -126,7 +126,7 @@ class GUI extends JFrame
         //  The starting value of the iterator is after the size of products array.
         for (int i = productMaxSize; i < (services.size() + productMaxSize); i++)
         {
-            JButton itemButton      =   new JButton(services.get(i - productMaxSize).getName());
+            JButton itemButton  =   new JButton(services.get(i - productMaxSize).getName());
 
             itemButton.setActionCommand(String.valueOf(i));
             itemButton.addActionListener(new ItemListener());
@@ -164,7 +164,7 @@ class GUI extends JFrame
     {
         public void actionPerformed(ActionEvent ae)
         {
-            int itemID   =   Integer.parseInt(ae.getActionCommand());
+            int itemID          =   Integer.parseInt(ae.getActionCommand());
             int productMaxSize  =   products.size();
 
             if (itemID < productMaxSize)
@@ -195,6 +195,7 @@ class GUI extends JFrame
         private JFrame itemFrame;
         private JPanel modalButton;
         private JLabel quantity;
+
         private int quantityCounter;
 
         private Service service;
@@ -215,8 +216,18 @@ class GUI extends JFrame
             itemModalInit(this.service.getName(), this.service.getCost(), 0);
         }
 
+        /*
+         *  @param  String  itemName
+         *  @param  double  itemCost
+         *  @param  int     itemQty
+         *
+         *  @brief
+         *
+         *  @return void
+         */
         private void itemModalInit(String itemName, double itemCost, int itemQty)
         {
+            //  Create a modelles frame for the itemModal with the item name as the title.
             itemFrame           =   new JFrame(itemName);
 
             JPanel itemPanel    =   new JPanel(new GridLayout(0, 1));
@@ -231,7 +242,7 @@ class GUI extends JFrame
             //  Required for double to String conversion.
             itemInfo.add(new JLabel(String.valueOf(itemCost), SwingConstants.CENTER));
 
-            //  If the item is a product with a quantity counter.
+            //  if item quantity is greater than 1, then it is a product.
             if (itemQty > 0)
             {
                 JButton removeQty   =   new JButton("-");
@@ -281,6 +292,14 @@ class GUI extends JFrame
                 }
             });
 
+            confirm.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent ae)
+                {
+
+                }
+            });
+
             itemFrame.setLayout(new BorderLayout());
             itemFrame.setSize(300, 200);
             itemFrame.setLocationRelativeTo(null);
@@ -310,7 +329,7 @@ class GUI extends JFrame
                 quantity.setText(String.valueOf(productQuantity));
 
                 return productQuantity;
-            } else 
+            } else
             {
                 return 1;
             }
