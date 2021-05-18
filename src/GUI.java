@@ -66,7 +66,6 @@ class GUI extends JFrame
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1080, 450);
-        this.setVisible(true);
 
         //  Set the layout of the frame
         this.setLayout(frameLayout);
@@ -94,6 +93,8 @@ class GUI extends JFrame
         //  Set checkout
         checkoutPanel.add(new JLabel("Salon Checkout Panel"));
         this.add(checkoutPanel, BorderLayout.EAST);
+
+        this.setVisible(true);
     }
 
     /*
