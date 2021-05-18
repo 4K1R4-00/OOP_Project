@@ -2,17 +2,17 @@ class Product extends Item
 {
     char pGenderType;
     String pCategory;
-    int pQuantity;
+    int pQuantity       =   1;
 
     Product(String productName, double productCost)
     {
         super(productName, productCost);
     }
 
-    Product(String productName, 
-            String productCategory, 
-            double productCost, 
-            char productGenderType, 
+    Product(String productName,
+            String productCategory,
+            double productCost,
+            char productGenderType,
             int productQuantity
             )
     {
