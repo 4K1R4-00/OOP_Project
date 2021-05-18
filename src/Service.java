@@ -8,14 +8,14 @@ public class Service extends Item
     private Time appointTime;
     private int appointType;
 
-    Service(String serviceName, double serviceCost)
+    Service(String serviceName, double serviceCost, int serviceQuantity)
     {
-        super(serviceName, serviceCost);
+        super(serviceName, serviceCost, serviceQuantity);
     }
 
-    Service(String serviceName, double serviceCost, Date appointDate, Time appointTime, int appointType)
+    Service(String serviceName, double serviceCost, Date appointDate, Time appointTime, int appointType, int serviceQuantity)
     {
-        super(serviceName, serviceCost);
+        super(serviceName, serviceCost, serviceQuantity);
         this.appointDate    =   appointDate;
         this.appointTime    =   appointTime;
         this.appointType    =   appointType;

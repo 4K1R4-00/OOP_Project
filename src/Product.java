@@ -2,24 +2,26 @@ class Product extends Item
 {
     char pGenderType;
     String pCategory;
-    int pQuantity;
 
-    Product(String productName, double productCost)
+
+    Product(String productName, double productCost, int productQuantity)
     {
-        super(productName, productCost);
+        super(productName, productCost, productQuantity);
     }
 
-    Product(String productName, 
-            String productCategory, 
-            double productCost, 
-            char productGenderType, 
-            int productQuantity
+    Product(String productName,
+            String productCategory,
+            int productQuantity,
+            double productCost,
+            char productGenderType
+
             )
     {
-        super(productName, productCost);
+        super(productName, productCost, productQuantity);
         this.pGenderType    =   productGenderType;
         this.pCategory      =   productCategory;
-        this.pQuantity      =   productQuantity;
+
+
     }
 
     public void updateGenderType(char updateItemType)
@@ -32,11 +34,6 @@ class Product extends Item
         this.pCategory      =   updateItemCategory;
     }
 
-    public void updateQuantity(int updateQuantity)
-    {
-        this.pQuantity      =   updateQuantity;
-    }
-
     public char getGenderType()
     {
         return pGenderType;
@@ -47,10 +44,6 @@ class Product extends Item
         return pCategory;
     }
 
-    public int getpQuantity()
-    {
-        return pQuantity;
-    }
 
 
 
