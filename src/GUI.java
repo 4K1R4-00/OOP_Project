@@ -170,6 +170,7 @@ class GUI extends JFrame
             if (itemID < productMaxSize)
             {
                 int productID   =   itemID;
+
                 ItemModalWindow productDialog   =   new ItemModalWindow(products.get(productID));
             }
             else if (itemID >= productMaxSize)
@@ -193,6 +194,7 @@ class GUI extends JFrame
         private JDialog itemWindow;
         private JFrame itemFrame;
         private JPanel modalButton;
+        private JLabel quantity;
 
         private Service service;
         private Product product;
@@ -201,35 +203,63 @@ class GUI extends JFrame
         {
             this.product        =   product;
 
+            itemModalInit(this.product.getName(), this.product.getCost(), this.product.getpQuantity());
+        }
+
+        ItemModalWindow(Service service)
+        {
+            this.service        =   service;
+
+            itemModalInit(this.service.getName(), this.service.getCost(), 0);
+        }
+
+        private void itemModalInit(String itemName, double itemCost, int itemQty)
+        {
             itemFrame           =   new JFrame();
 
             JPanel itemPanel    =   new JPanel(new GridLayout(0, 1));
-            JPanel itemModal    =   new JPanel(new GridLayout(0, 2));
-
-            itemModal.add(new JLabel("Item Name: ", SwingConstants.CENTER));
-            itemModal.add(new JLabel(this.product.getName(), SwingConstants.CENTER));
-
-            itemModal.add(new JLabel("Cost: ", SwingConstants.CENTER));
-
-            //  Required for double to String conversion.
-            String itemName     =   String.valueOf(this.product.getCost());
-            itemModal.add(new JLabel(itemName, SwingConstants.CENTER));
-
-            //  Quantity button
-            JButton removeQty   =   new JButton("-");
-
-            String itemQty      =   String.valueOf(this.product.getpQuantity());
-            JLabel quantity     =   new JLabel(itemQty, SwingConstants.CENTER);
-
-            JButton addQty      =   new JButton("+");
-
+            JPanel itemInfo     =   new JPanel(new GridLayout(0, 2));
             JPanel itemQtyModal =   new JPanel(new GridLayout(0, 3));
 
-            itemQtyModal.add(removeQty);
-            itemQtyModal.add(quantity);
-            itemQtyModal.add(addQty);
+            itemInfo.add(new JLabel("Item Name: ", SwingConstants.CENTER));
+            itemInfo.add(new JLabel(itemName, SwingConstants.CENTER));
 
-            itemPanel.add(itemModal);
+            itemInfo.add(new JLabel("Cost: ", SwingConstants.CENTER));
+
+            //  Required for double to String conversion.
+            itemInfo.add(new JLabel(String.valueOf(itemCost), SwingConstants.CENTER));
+
+            //  Quantity button
+            if (itemQty > 0)
+            {
+                JButton removeQty   =   new JButton("-");
+
+                quantity            =   new JLabel(String.valueOf(itemQty), SwingConstants.CENTER);
+
+                JButton addQty      =   new JButton("+");
+
+                addQty.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        incProductQuantity(itemQty);
+                    };
+                });
+
+                removeQty.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        //decProductQuantity(this.product.setQuantity());
+                    }
+                });
+
+                itemQtyModal.add(removeQty);
+                itemQtyModal.add(quantity);
+                itemQtyModal.add(addQty);
+            }
+
+            itemPanel.add(itemInfo);
             itemPanel.add(itemQtyModal);
 
 
@@ -259,44 +289,14 @@ class GUI extends JFrame
 
             itemFrame.setVisible(true);
 
-            itemWindow          =   new JDialog(itemFrame, this.product.getName(), true);
-
+            itemWindow          =   new JDialog(itemFrame, itemName, true);
         }
 
-        ItemModalWindow(Service service)
+        public void incProductQuantity(int productQuantity)
         {
-            this.service        =   service;
-
-            itemFrame           =   new JFrame();
-
-            JPanel itemModal    =   new JPanel(new GridLayout(2, 3));
-
-            itemModal.add(new JLabel("Item Name: "));
-            itemModal.add(new JLabel(this.service.getName()));
-
-            modalButton         =   new JPanel(new GridLayout(1, 2));
-            JButton cancel      =   new JButton("Cancel");
-            JButton confirm     =   new JButton("Confirm");
-
-            itemFrame.setLayout(new BorderLayout());
-            itemFrame.setSize(300, 200);
-            itemFrame.setVisible(true);
-            itemFrame.setLocationRelativeTo(null);
-
-            itemFrame.add(itemModal, BorderLayout.CENTER);
-            itemFrame.add(modalButton, BorderLayout.SOUTH);
-
-            itemWindow          =   new JDialog(itemFrame, service.getName(), true);
-
-            cancel.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent ae)
-                {
-                    itemFrame.setVisible(false);
-                }
-            });
+            productQuantity++;
+            quantity.setText(String.valueOf(productQuantity));
         }
-
     }
 
 }
