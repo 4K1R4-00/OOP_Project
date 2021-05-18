@@ -395,6 +395,13 @@ class GUI extends JFrame
             {
                 checkout.add(this.service);
             }
+
+            for (int i = 0; i < checkout.size(); i++)
+            {
+                System.out.println(checkout.get(i).getName());
+                System.out.println(checkout.get(i).getCost());
+                System.out.println(checkout.get(i).getQuantity());
+            }
         }
     }
 
