@@ -2,7 +2,7 @@ class Product extends Item
 {
     char pGenderType;
     String pCategory;
-    int pQuantity;
+    int pQuantity       =   1;
 
     Product(String productName, double productCost)
     {
