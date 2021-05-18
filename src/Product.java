@@ -4,9 +4,9 @@ class Product extends Item
     String pCategory;
 
 
-    Product(String productName, double productCost, int productQuantity)
+    Product(String productName, double productCost)
     {
-        super(productName, productCost, productQuantity);
+        super(productName, productCost);
     }
 
     Product(String productName,
