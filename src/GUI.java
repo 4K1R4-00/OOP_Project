@@ -13,10 +13,10 @@ import javax.swing.JMenuItem;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import java.awt.Color;
 
 import java.util.ArrayList;
 
@@ -101,6 +101,9 @@ class GUI extends JFrame
         checkoutItemHead.add(new JLabel("----------- Salon Checkout Panel ----------"));
 
         checkoutPanel.add(checkoutItemHead, BorderLayout.NORTH);
+
+        checkoutItemPanel.setLayout(new BoxLayout(checkoutItemPanel, BoxLayout.Y_AXIS));
+
         checkoutPanel.add(checkoutScroll, BorderLayout.CENTER);
 
         checkoutTotal.add(new JLabel("Grand Total: ", SwingConstants.CENTER));
@@ -147,6 +150,27 @@ class GUI extends JFrame
 
             itemPanel.add(itemButton);
         }
+    }
+
+    private void displayCheckoutListing()
+    {
+
+        checkoutItemPanel.removeAll();
+
+        for (int i = 0; i < checkout.size(); i++)
+        {
+            JPanel checkoutItem     =   new JPanel();
+
+            checkoutItem.add(new JLabel(checkout.get(i).getName()));
+            checkoutItem.add(new JLabel(String.valueOf(checkout.get(i).getCost())));
+            checkoutItem.add(new JLabel(String.valueOf(checkout.get(i).getQuantity())));
+
+            checkoutItemPanel.add(checkoutItem);
+        }
+
+        checkoutItemPanel.revalidate();
+
+        checkoutItemPanel.repaint();
     }
 
     /*
@@ -402,6 +426,8 @@ class GUI extends JFrame
                 System.out.println(checkout.get(i).getCost());
                 System.out.println(checkout.get(i).getQuantity());
             }
+
+            displayCheckoutListing();
         }
     }
 
