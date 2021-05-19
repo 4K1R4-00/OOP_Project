@@ -160,10 +160,11 @@ class GUI extends JFrame
         for (int i = 0; i < checkout.size(); i++)
         {
             JPanel checkoutItem     =   new JPanel();
+            checkoutItem.setLayout(new GridLayout(0, 3));
 
-            checkoutItem.add(new JLabel(checkout.get(i).getName()));
-            checkoutItem.add(new JLabel(String.valueOf(checkout.get(i).getCost())));
-            checkoutItem.add(new JLabel(String.valueOf(checkout.get(i).getQuantity())));
+            checkoutItem.add(new JLabel(checkout.get(i).getName(), SwingConstants.LEFT));
+            checkoutItem.add(new JLabel("x" + String.valueOf(checkout.get(i).getQuantity()), SwingConstants.CENTER));
+            checkoutItem.add(new JLabel(String.valueOf(checkout.get(i).getCost()), SwingConstants.RIGHT));
 
             checkoutItemPanel.add(checkoutItem);
         }
