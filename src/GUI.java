@@ -13,10 +13,10 @@ import javax.swing.JMenuItem;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import java.awt.Color;
 
 import java.util.ArrayList;
 
@@ -29,12 +29,19 @@ class GUI extends JFrame
     private JMenuItem settingButton     =   new JMenuItem("Setting");
 
     private JPanel itemPanel            =   new JPanel(itemLayout);
-    private JScrollPane scrollableItem  =   new JScrollPane(itemPanel,
+    private JScrollPane itemScrollable  =   new JScrollPane(itemPanel,
                                                             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                                                             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
                                                             );
 
-    private JPanel checkoutPanel        =   new JPanel();
+    private JPanel checkoutPanel        =   new JPanel(new BorderLayout(5, 10));
+    private JPanel checkoutItemHead     =   new JPanel();
+    private JPanel checkoutItemPanel    =   new JPanel();
+    private JScrollPane checkoutScroll  =   new JScrollPane(checkoutItemPanel,
+                                                            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                                                            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+                                                            );
+    private JPanel checkoutTotal        =   new JPanel(new GridLayout(0, 2, 5, 5));
 
     // Product list and service list
     private ArrayList<Product> products;
@@ -66,7 +73,7 @@ class GUI extends JFrame
         this.setTitle("Salon App");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1080, 450);
+        this.setSize(1440, 720);
 
         //  Set the layout of the frame
         this.setLayout(frameLayout);
@@ -88,11 +95,21 @@ class GUI extends JFrame
         //  Create the list of item available buttons.
         createItemListing(this.products, this.services);
 
-        scrollableItem.setBackground(Color.red);
-        this.add(scrollableItem, BorderLayout.CENTER);
+        this.add(itemScrollable, BorderLayout.CENTER);
 
         //  Set checkout
-        checkoutPanel.add(new JLabel("Salon Checkout Panel"));
+        checkoutItemHead.add(new JLabel("----------- Salon Checkout Panel ----------"));
+
+        checkoutPanel.add(checkoutItemHead, BorderLayout.NORTH);
+
+        checkoutItemPanel.setLayout(new BoxLayout(checkoutItemPanel, BoxLayout.Y_AXIS));
+
+        checkoutPanel.add(checkoutScroll, BorderLayout.CENTER);
+
+        checkoutTotal.add(new JLabel("Grand Total: ", SwingConstants.CENTER));
+        checkoutTotal.add(new JLabel("$xxxxxxxx", SwingConstants.CENTER));
+        checkoutPanel.add(checkoutTotal, BorderLayout.SOUTH);
+
         this.add(checkoutPanel, BorderLayout.EAST);
 
         this.setVisible(true);
@@ -135,6 +152,27 @@ class GUI extends JFrame
         }
     }
 
+    private void displayCheckoutListing()
+    {
+
+        checkoutItemPanel.removeAll();
+
+        for (int i = 0; i < checkout.size(); i++)
+        {
+            JPanel checkoutItem     =   new JPanel();
+
+            checkoutItem.add(new JLabel(checkout.get(i).getName()));
+            checkoutItem.add(new JLabel(String.valueOf(checkout.get(i).getCost())));
+            checkoutItem.add(new JLabel(String.valueOf(checkout.get(i).getQuantity())));
+
+            checkoutItemPanel.add(checkoutItem);
+        }
+
+        checkoutItemPanel.revalidate();
+
+        checkoutItemPanel.repaint();
+    }
+
     /*
      *  @brief
      *  The MenuListener class listens for events that occur in the menubar.
@@ -173,8 +211,8 @@ class GUI extends JFrame
                 int productID   =   itemID;
 
                 ItemModalWindow productDialog   =   new ItemModalWindow(products.get(productID));
-            }
-            else if (itemID >= productMaxSize)
+
+            } else if (itemID >= productMaxSize)
             {
                 int serviceID   =   itemID - productMaxSize;
 
@@ -356,6 +394,20 @@ class GUI extends JFrame
             }
         }
 
+        /*
+         *  @params     void
+         *
+         *  @brief
+         *  This method just compares the quantityCounter to 1, in order to check whether
+         *  it is a product, or a service; because services is not quantitative.
+         *
+         *  It then assigned the quantity to the product if it is a product, and adds
+         *  it to the checkout ArrayList of Item.
+         *
+         *  else it will add the service to the ArrayList of Item.
+         *
+         *  @return     void
+         */
         public void setConfirmItem()
         {
             if (quantityCounter >= 1)
@@ -368,11 +420,14 @@ class GUI extends JFrame
                 checkout.add(this.service);
             }
 
-            for(int i = 0; i < checkout.size(); i++)
+            for (int i = 0; i < checkout.size(); i++)
             {
                 System.out.println(checkout.get(i).getName());
                 System.out.println(checkout.get(i).getCost());
+                System.out.println(checkout.get(i).getQuantity());
             }
+
+            displayCheckoutListing();
         }
     }
 

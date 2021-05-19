@@ -46,8 +46,9 @@ class App
         //  runTest();
         testProductData();
         testServiceData();
-        TUI tuiInterface    =   new TUI(products, services);
-        tuiInterface.start();
+
+        //TUI tuiInterface    =   new TUI(products, services);
+        //tuiInterface.start();
     }
 
     /*
@@ -173,6 +174,12 @@ class App
         products.add(new Product("Pomade ", 20.00));
         products.add(new Product("Gel    ", 15.00));
         products.add(new Product("Conditioner", 11.00));
+        products.add(new Product("Hair Dryer", 70.00));
+        products.add(new Product("Straightener", 65.00));
+        products.add(new Product("Hair Dye", 20.00));
+        products.add(new Product("Hair Extensions", 30.00));
+        products.add(new Product("Hair Syrum", 30.00));
+        products.add(new Product("Comb", 11.00));
     }
 
     public void testServiceData()
