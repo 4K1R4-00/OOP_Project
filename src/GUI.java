@@ -128,6 +128,9 @@ class GUI extends JFrame
      */
     private void createItemListing(ArrayList<Product> products, ArrayList<Service> services)
     {
+        //  Remove all component buttons in item panel for regeneration.
+        itemPanel.removeAll();
+
         int productMaxSize      =   products.size();
 
         for (int i = 0; i < productMaxSize; i++)
@@ -150,8 +153,19 @@ class GUI extends JFrame
 
             itemPanel.add(itemButton);
         }
+
+        //  revalidate the components
+        itemPanel.revalidate();
+        itemPanel.repaint();
     }
 
+    /*
+     *  @params     void
+     *
+     *  @brief
+     *
+     *  @return     void
+     */
     private void displayCheckoutListing()
     {
 
