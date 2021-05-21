@@ -34,7 +34,7 @@ class Receipt
      */
     private boolean checkReceiptFolderExist()
     {
-        this.receiptFolder      =   new File("receipts/");
+        this.receiptFolder      =   new File("../receipts/");
 
         boolean fileExist       =   this.receiptFolder.exists();
 
@@ -77,7 +77,7 @@ class Receipt
         try
         {
             //  Create the file object.
-            FileWriter receiptOutput       =   new FileWriter(receiptName);
+            FileWriter receiptOutput       =   new FileWriter(receiptFolder.getAbsolutePath() + "/" + receiptName);
 
             //  Iterate through the checkout list, then print the items name, quantity and cost on receipt.
             for (int i = 0; i < checkoutList.size(); i++)
