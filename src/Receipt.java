@@ -40,6 +40,8 @@ class Receipt
 
         folderExist             =   receiptFolder.exists();
 
+        System.out.println(receiptFolder.getAbsolutePath());
+
         if (folderExist)
         {
             return folderExist;
