@@ -25,9 +25,6 @@ class GUI extends JFrame
     private GridLayout itemLayout       =   new GridLayout(0, 3, 5, 5);
     private BorderLayout frameLayout    =   new BorderLayout(5, 10);
 
-    private JMenuItem infoButton        =   new JMenuItem("Information");
-    private JMenuItem settingButton     =   new JMenuItem("Setting");
-
     private JPanel itemPanel            =   new JPanel(itemLayout);
     private JScrollPane itemScrollable  =   new JScrollPane(itemPanel,
                                                             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -86,11 +83,14 @@ class GUI extends JFrame
         JMenuBar menuBar    =   new JMenuBar();
         JMenu systemMenu    =   new JMenu("System");
 
-        settingButton.addActionListener(new MenuListener());
-        infoButton.addActionListener(new MenuListener());
+        JMenuItem setting   =   new JMenuItem("Setting");
+        JMenuItem info      =   new JMenuItem("Information");
 
-        systemMenu.add(infoButton);
-        systemMenu.add(settingButton);
+        setting.addActionListener(new SettingMenuListener());
+        info.addActionListener(new InfoMenuListener());
+
+        systemMenu.add(info);
+        systemMenu.add(setting);
         menuBar.add(systemMenu);
 
         //  Set the menu bar
@@ -216,7 +216,7 @@ class GUI extends JFrame
 
             int itemQuantity    =   checkout.get(i).getQuantity();
             double costPerItem  =   checkout.get(i).getCost();
-            
+
             double totalPerItem =   0;
 
             if (itemQuantity > 0)
@@ -249,17 +249,25 @@ class GUI extends JFrame
      *  @brief
      *  The MenuListener class listens for events that occur in the menubar.
      */
-    class MenuListener implements ActionListener
+    class SettingMenuListener implements ActionListener
     {
         public void actionPerformed(ActionEvent ae)
         {
-            if (ae.getSource() == infoButton)
-                System.out.println("The infobutton has been pressed");
-            else if (ae.getSource() == settingButton)
-                System.out.println("The settingButton has been pressed");
+            System.out.println("The setting button has been pressed");
         }
     }
 
+    /*
+     *  @brief
+     *  The MenuListener class listens for events that occur in the menubar.
+     */
+    class InfoMenuListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent ae)
+        {
+            System.out.println("The info button has been pressed");
+        }
+    }
     /*
      *  @brief
      *  The ItemListener listens to the events in the item menu.
@@ -421,6 +429,7 @@ class GUI extends JFrame
                 public void actionPerformed(ActionEvent ae)
                 {
                     itemFrame.setVisible(false);
+                    itemFrame.dispose();
                 }
             });
 
@@ -430,6 +439,7 @@ class GUI extends JFrame
                 {
                     setConfirmItem();
                     itemFrame.setVisible(false);
+                    itemFrame.dispose();
                 }
             });
 
