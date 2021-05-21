@@ -74,14 +74,14 @@ class Receipt
     {
         System.out.println(receiptFolder.getAbsolutePath());
 
-        String receiptPath  =   receiptFolder.getAbsolutePath() + "\\" + receiptName();
+        String receiptPath  =   receiptFolder.getAbsolutePath() + "/" + receiptName();
 
         System.out.println(receiptPath);
 
         try
         {
             //  Create the file object.
-            FileWriter receiptOutput       =   new FileWriter(receiptPath);
+            FileWriter receiptOutput       =   new FileWriter("test.txt");
 
             //  Iterate through the checkout list, then print the items name, quantity and cost on receipt.
             for (int i = 0; i < checkoutList.size(); i++)
