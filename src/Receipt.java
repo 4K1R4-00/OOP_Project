@@ -72,7 +72,7 @@ class Receipt
 
     private void receiptFormat()
     {
-        String receiptDir   =   "receipts/" + receiptName() + ".txt";
+        String receiptDir   =   receiptFolder +"/" + receiptName() + ".txt";
 
         try
         {
