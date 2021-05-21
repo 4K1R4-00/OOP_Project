@@ -36,7 +36,7 @@ class Receipt
     {
         boolean folderExist     =   false;
 
-        receiptFolder           =   new File("receipts");
+        receiptFolder           =   new File("../receipts/");
 
         folderExist             =   receiptFolder.exists();
 
