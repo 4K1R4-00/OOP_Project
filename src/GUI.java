@@ -227,7 +227,7 @@ class GUI extends JFrame
         grandTotalLabel.setText("RM " + String.valueOf(this.checkoutGrandTotal));
     }
 
-    public void resetCheckoutList()
+    private void resetCheckoutList()
     {
         checkoutGrandTotal     =   0.0;
 
@@ -299,7 +299,7 @@ class GUI extends JFrame
         public void actionPerformed(ActionEvent ae)
         {
             Receipt receipt     =   new Receipt(checkout);
-            receipt.printReceipt();
+            receipt.generateReceipt();
             resetCheckoutList();
         }
     }
