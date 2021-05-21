@@ -17,6 +17,12 @@ class App
     //  Item product and service checkout list
     private Item[] checkout     =   new Item[20];
 
+    public static void main(String[] args)
+    {
+        //  Instantiate App Object
+        App app     =   new App();
+    }
+
     //  Default constructor
     App()
     {

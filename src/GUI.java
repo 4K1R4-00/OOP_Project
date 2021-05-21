@@ -1,5 +1,4 @@
 import javax.swing.JFrame;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -209,8 +208,7 @@ class GUI extends JFrame
             checkoutItem.setLayout(new GridLayout(0, 3));
 
             checkoutItem.add(new JLabel(serviceCheckout.get(i).getName(), SwingConstants.LEFT));
-            checkoutItem.add(new JLabel("x" + String.valueOf(serviceCheckout.get(i).getQuantity()),
-                                        SwingConstants.CENTER));
+            checkoutItem.add(new JLabel(" ", SwingConstants.CENTER));
 
             checkoutItem.add(new JLabel(String.valueOf(serviceCheckout.get(i).getCost()), SwingConstants.RIGHT));
 
