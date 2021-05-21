@@ -63,11 +63,9 @@ class Receipt
     private String receiptName()
     {
         LocalDateTime dateTime              =   LocalDateTime.now();
-        DateTimeFormatter dateTimeFormat    =   DateTimeFormatter.ofPattern("dd-MM-yyyy_HH:mm:ss");
+        DateTimeFormatter dateTimeFormat    =   DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-        //String receiptName  =   dateTime.format(dateTimeFormat) + ".txt";
-
-        String receiptName  =   "Test.txt";
+        String receiptName  =   dateTime.format(dateTimeFormat) + ".txt";
 
         return receiptName;
     }
