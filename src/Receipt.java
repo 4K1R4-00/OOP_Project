@@ -10,6 +10,7 @@ class Receipt
 {
     private ArrayList<Item> checkoutList    =   new ArrayList<Item>(5);
     private File receiptFolder;
+    private String receiptName;
 
     //  Default object constructor
     Receipt() {}
@@ -33,9 +34,9 @@ class Receipt
      */
     private boolean checkReceiptFolderExist()
     {
-        receiptFolder           =   new File("receipts/");
+        this.receiptFolder      =   new File("receipts/");
 
-        boolean fileExist       =   receiptFolder.exists();
+        boolean fileExist       =   this.receiptFolder.exists();
 
         if (fileExist)
         {
@@ -43,10 +44,9 @@ class Receipt
         }
         else
         {
-            receiptFolder.mkdir();
-            System.out.println("Folder creater");
+            this.receiptFolder.mkdir();
 
-            fileExist           =   receiptFolder.exists();
+            fileExist           =   this.receiptFolder.exists();
             return fileExist;
         }
     }
@@ -63,7 +63,7 @@ class Receipt
     private String receiptName()
     {
         LocalDateTime dateTime              =   LocalDateTime.now();
-        DateTimeFormatter dateTimeFormat    =   DateTimeFormatter.ofPattern("dd-MM-yyyy_HH:mm:ss");
+        DateTimeFormatter dateTimeFormat    =   DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss");
 
         String receiptName  =   dateTime.format(dateTimeFormat) + ".txt";
 
@@ -72,16 +72,16 @@ class Receipt
 
     private void receiptFormat()
     {
-        System.out.println(receiptFolder.getAbsolutePath());
-
-        String receiptPath  =   receiptFolder.getAbsolutePath() + "\\" + receiptName();
-
-        System.out.println(receiptPath);
+        this.receiptName    =   receiptName();
 
         try
         {
             //  Create the file object.
-            FileWriter receiptOutput       =   new FileWriter(receiptPath);
+            FileWriter receiptOutput       =   new FileWriter(receiptFolder.getAbsolutePath() + "/" + receiptName);
+
+            receiptOutput.write("===========================================\n");
+            receiptOutput.write("       THANK YOU FOR COMING TO SALON       \n");
+            receiptOutput.write("===========================================\n");
 
             //  Iterate through the checkout list, then print the items name, quantity and cost on receipt.
             for (int i = 0; i < checkoutList.size(); i++)
@@ -96,10 +96,14 @@ class Receipt
                 receiptOutput.write(itemOutput);
             }
 
+            receiptOutput.write("===========================================\n");
+            receiptOutput.write("Grand Total:                               \n");
+            receiptOutput.write("===========================================\n");
+
             //  Close the file object before exit.
             receiptOutput.close();
 
-            System.out.println("Receipt " + receiptPath + " was generated.");
+            System.out.println("Receipt " + this.receiptName + " was generated.");
 
         } catch (IOException e)
         {
