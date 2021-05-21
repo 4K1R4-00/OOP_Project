@@ -74,7 +74,7 @@ class Receipt
     {
         System.out.println(receiptFolder.getAbsolutePath());
 
-        String receiptPath  =   receiptFolder.getAbsolutePath() + "//" + receiptName();
+        String receiptPath  =   receiptFolder.getAbsolutePath() + "\\" + receiptName();
 
         System.out.println(receiptPath);
 
