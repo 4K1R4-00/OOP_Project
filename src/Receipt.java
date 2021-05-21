@@ -74,6 +74,8 @@ class Receipt
     {
         String receiptDir   =   receiptFolder.getAbsolutePath() +"/" + receiptName() + ".txt";
 
+        System.out.println(receiptDir);
+
         try
         {
             //  Create the file object.
