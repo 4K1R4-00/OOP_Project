@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 class Receipt
 {
     private ArrayList<Item> checkoutList    =   new ArrayList<Item>(5);
+    private File receiptFolder;
     private FileWriter receiptOutput;
 
     //  Default object constructor
@@ -15,9 +17,49 @@ class Receipt
 
     Receipt(ArrayList<Item> checkoutList)
     {
-        this.checkoutList   =   checkoutList;
+        this.checkoutList       =   checkoutList;
     }
 
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *  The method checks for whether the receipts/ directory exist.
+     *
+     *  if it does not exist, then create a folder name receipts.
+     *
+     *  then return true, as a confirmation that it exist.
+     *
+     *  @return     boolean     folderExist
+     */
+    private boolean checkReceiptFolderExist()
+    {
+        boolean folderExist     =   false;
+
+        receiptFolder           =   new File("receipts");
+
+        folderExist             =   receiptFolder.exists();
+
+        if (folderExist)
+        {
+            return folderExist;
+        }
+        else
+        {
+            folderExist         =   receiptFolder.mkdir();
+            return folderExist;
+        }
+    }
+
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *  The method generates the receipt name everytime it is called.
+     *  The naming convention is based on the date and time of the local machine.
+     *
+     *  @return     void
+     */
     private String receiptName()
     {
         LocalDateTime dateTime              =   LocalDateTime.now();
@@ -28,7 +70,7 @@ class Receipt
         return receiptName;
     }
 
-    public void printReceipt()
+    private void receiptFormat()
     {
         String receiptDir   =   "receipts/" + receiptName() + ".txt";
 
@@ -42,12 +84,12 @@ class Receipt
             {
                 Item item   =   checkoutList.get(i);
 
-                String itemOutputFormat     =   item.getName() +
-                                                "   X" + item.getQuantity() +
-                                                "  RM" + item.getCost() +
-                                                "\n";
+                String itemOutput   =   item.getName() +
+                                        "   X" + item.getQuantity() +
+                                        "  RM" + item.getCost() +
+                                        "\n";
 
-                this.receiptOutput.write(itemOutputFormat);
+                this.receiptOutput.write(itemOutput);
             }
 
             //  Close the file object before exit.
@@ -59,6 +101,22 @@ class Receipt
         {
             System.out.println("A file error has occured during receipt generation.");
             e.printStackTrace();
+        }
+    }
+
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *  The method just prints the receipt to the receipts folder.
+     *
+     *  @return     void
+     */
+    public void printReceipt()
+    {
+        if (checkReceiptFolderExist())
+        {
+            receiptFormat();
         }
     }
 }

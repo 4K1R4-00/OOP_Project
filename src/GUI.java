@@ -108,6 +108,12 @@ class GUI extends JFrame
 
         checkoutTotal.add(new JLabel("Grand Total: ", SwingConstants.CENTER));
         checkoutTotal.add(new JLabel("$xxxxxxxx", SwingConstants.CENTER));
+
+        JButton checkoutButton  =   new JButton("Checkout");
+        checkoutButton.addActionListener(new CheckoutListener());
+
+        checkoutTotal.add(checkoutButton);
+
         checkoutPanel.add(checkoutTotal, BorderLayout.SOUTH);
 
         this.add(checkoutPanel, BorderLayout.EAST);
@@ -233,6 +239,21 @@ class GUI extends JFrame
 
                 ItemModalWindow serviceDialog   =   new ItemModalWindow(services.get(serviceID));
             }
+        }
+    }
+
+    /*
+     *  @brief
+     *  The CheckoutListener listens to the input event of the checkout button.
+     *  
+     *  Prints the checkoutListing receipt.
+     */
+    class CheckoutListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent ae)
+        {
+            Receipt receipt     =   new Receipt(checkout);
+            receipt.printReceipt();
         }
     }
 
