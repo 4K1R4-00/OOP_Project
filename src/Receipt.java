@@ -40,8 +40,6 @@ class Receipt
 
         folderExist             =   receiptFolder.exists();
 
-        System.out.println(receiptFolder.getAbsolutePath());
-
         if (folderExist)
         {
             return folderExist;
@@ -74,7 +72,7 @@ class Receipt
 
     private void receiptFormat()
     {
-        String receiptDir   =   receiptFolder +"/" + receiptName() + ".txt";
+        String receiptDir   =   receiptFolder.getAbsolutePath() +"/" + receiptName() + ".txt";
 
         try
         {
