@@ -8,16 +8,17 @@ import java.time.format.DateTimeFormatter;
 
 class Receipt
 {
-    private ArrayList<Item> checkoutList    =   new ArrayList<Item>(5);
     private File receiptFolder;
     private String receiptName;
+
+    private ArrayList<Item> receiptItemList    =   new ArrayList<Item>(5);
 
     //  Default object constructor
     Receipt() {}
 
-    Receipt(ArrayList<Item> checkoutList)
+    Receipt(ArrayList<Item> receiptItemList)
     {
-        this.checkoutList       =   checkoutList;
+        this.receiptItemList       =   receiptItemList;
     }
 
     /*
@@ -84,9 +85,9 @@ class Receipt
             receiptOutput.write("===========================================\n");
 
             //  Iterate through the checkout list, then print the items name, quantity and cost on receipt.
-            for (int i = 0; i < checkoutList.size(); i++)
+            for (int i = 0; i < receiptItemList.size(); i++)
             {
-                Item item   =   checkoutList.get(i);
+                Item item   =   receiptItemList.get(i);
 
                 String itemOutput   =   item.getName() +
                                         "   X" + item.getQuantity() +
@@ -120,7 +121,7 @@ class Receipt
      *
      *  @return     void
      */
-    public void printReceipt()
+    public void generateReceipt()
     {
         if (checkReceiptFolderExist())
         {
