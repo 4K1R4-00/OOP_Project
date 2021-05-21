@@ -72,7 +72,7 @@ class Receipt
 
     private void receiptFormat()
     {
-        String receiptDir   =   receiptFolder.getAbsolutePath() +"/" + receiptName() + ".txt";
+        String receiptDir   =   receiptFolder.getAbsolutePath() + receiptName() + ".txt";
 
         System.out.println(receiptDir);
 
