@@ -34,7 +34,7 @@ class Receipt
      */
     private boolean checkReceiptFolderExist()
     {
-        this.receiptFolder      =   new File("../receipts/");
+        this.receiptFolder      =   new File("receipts/");
 
         boolean fileExist       =   this.receiptFolder.exists();
 
