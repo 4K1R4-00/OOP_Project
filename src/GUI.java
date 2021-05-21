@@ -48,6 +48,10 @@ class GUI extends JFrame
     private ArrayList<Service> services;
 
     private ArrayList<Item> checkout    =   new ArrayList<Item>(5);
+
+    private ArrayList<Product> productCheckout      =   new ArrayList<Product>(5);
+    private ArrayList<Service> serviceCheckout      =   new ArrayList<Service>(5);
+
     private double checkoutGrandTotal   =   0.0;
 
     // Default constructor
@@ -72,9 +76,9 @@ class GUI extends JFrame
     {
         //  Default gui settings
         this.setTitle("Salon App");
-        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1440, 720);
+        this.setLocationRelativeTo(null);
 
         //  Set the layout of the frame
         this.setLayout(frameLayout);
@@ -103,15 +107,12 @@ class GUI extends JFrame
 
         //  Set checkout
         checkoutItemHead.add(new JLabel("----------- Salon Checkout Panel ----------"));
-
         checkoutPanel.add(checkoutItemHead, BorderLayout.NORTH);
 
         checkoutItemPanel.setLayout(new BoxLayout(checkoutItemPanel, BoxLayout.Y_AXIS));
-
         checkoutPanel.add(checkoutScroll, BorderLayout.CENTER);
 
         checkoutTotal.add(new JLabel("Grand Total: ", SwingConstants.CENTER));
-
         grandTotalLabel  =   new JLabel("RM 0.0", SwingConstants.CENTER);
         checkoutTotal.add(grandTotalLabel);
 
@@ -184,28 +185,41 @@ class GUI extends JFrame
      *
      *  @return     void
      */
-    private void displayCheckoutListing()
+    private void getCheckoutListing()
     {
-
         checkoutItemPanel.removeAll();
 
-        for (int i = 0; i < checkout.size(); i++)
+        for (int i = 0; i < productCheckout.size(); i++)
         {
             JPanel checkoutItem     =   new JPanel();
             checkoutItem.setLayout(new GridLayout(0, 3));
 
-            checkoutItem.add(new JLabel(checkout.get(i).getName(), SwingConstants.LEFT));
-            checkoutItem.add(new JLabel("x" + String.valueOf(checkout.get(i).getQuantity()), SwingConstants.CENTER));
-            checkoutItem.add(new JLabel(String.valueOf(checkout.get(i).getCost()), SwingConstants.RIGHT));
+            checkoutItem.add(new JLabel(productCheckout.get(i).getName(), SwingConstants.LEFT));
+            checkoutItem.add(new JLabel("x" + String.valueOf(productCheckout.get(i).getQuantity()),
+                                        SwingConstants.CENTER));
+
+            checkoutItem.add(new JLabel(String.valueOf(productCheckout.get(i).getCost()), SwingConstants.RIGHT));
+
+            checkoutItemPanel.add(checkoutItem);
+        }
+
+        for (int i = 0; i < serviceCheckout.size(); i++)
+        {
+            JPanel checkoutItem     =   new JPanel();
+            checkoutItem.setLayout(new GridLayout(0, 3));
+
+            checkoutItem.add(new JLabel(serviceCheckout.get(i).getName(), SwingConstants.LEFT));
+            checkoutItem.add(new JLabel("x" + String.valueOf(serviceCheckout.get(i).getQuantity()),
+                                        SwingConstants.CENTER));
+
+            checkoutItem.add(new JLabel(String.valueOf(serviceCheckout.get(i).getCost()), SwingConstants.RIGHT));
 
             checkoutItemPanel.add(checkoutItem);
         }
 
         checkoutItemPanel.revalidate();
-
         checkoutItemPanel.repaint();
     }
-
 
     private void displayGrandTotal()
     {
@@ -236,7 +250,8 @@ class GUI extends JFrame
     {
         checkoutGrandTotal     =   0.0;
 
-        checkout.clear();
+        productCheckout.clear();
+        serviceCheckout.clear();
 
         checkoutItemPanel.removeAll();
         checkoutItemPanel.revalidate();
@@ -288,15 +303,35 @@ class GUI extends JFrame
 
             if (itemID < productMaxSize)
             {
-                int productID   =   itemID;
+                int productID               =   itemID;
+                Product selectedProduct     =   products.get(productID);
 
-                ItemModalWindow productDialog   =   new ItemModalWindow(products.get(productID));
+                GUI parentFrame                 =   new GUI();
+                ItemModalWindow productDialog   =   new ItemModalWindow(parentFrame, selectedProduct);
+
+                Product item    =   productDialog.displayProductDialog();
+
+                if (item !=  null)
+                    productCheckout.add(item);
+
+                getCheckoutListing();
+                displayGrandTotal();
 
             } else if (itemID >= productMaxSize)
             {
-                int serviceID   =   itemID - productMaxSize;
+                int serviceID               =   itemID - productMaxSize;
+                Service selectedService     =   services.get(serviceID);
 
-                ItemModalWindow serviceDialog   =   new ItemModalWindow(services.get(serviceID));
+                GUI parentFrame                 =   new GUI();
+                ItemModalWindow serviceDialog   =   new ItemModalWindow(parentFrame, selectedService);
+
+                Service item    =   serviceDialog.displayServiceDialog();
+
+                if (item != null)
+                    serviceCheckout.add(item);
+
+                getCheckoutListing();
+                displayGrandTotal();
             }
         }
     }
@@ -316,218 +351,4 @@ class GUI extends JFrame
             resetCheckoutList();
         }
     }
-
-    /*
-     *  @brief
-     *
-     *  The ItemModalWindow is the dialog window that appears after a
-     *  product or service is selected, in order to ensure the quantity and cost.
-     *
-     */
-    class ItemModalWindow
-    {
-        private JDialog itemWindow;
-        private JFrame itemFrame;
-        private JPanel modalButton;
-        private JLabel quantity;
-
-        private int quantityCounter;
-
-        private Service service;
-        private Product product;
-
-        ItemModalWindow(Product product)
-        {
-            this.product            =   product;
-
-            //  A product has a minimum of 1 quantity
-            this.quantityCounter    =   1;
-
-            itemModalInit(this.product.getName(), this.product.getCost(), quantityCounter);
-        }
-
-        ItemModalWindow(Service service)
-        {
-            this.service            =   service;
-
-            //  A service is not quantitative like a product, so it is set to 0.
-            this.quantityCounter    =   0;
-
-            itemModalInit(this.service.getName(), this.service.getCost(), quantityCounter);
-        }
-
-        /*
-         *  @param  String  itemName
-         *  @param  double  itemCost
-         *  @param  int     itemQty
-         *
-         *  @brief
-         *
-         *  @return void
-         */
-        private void itemModalInit(String itemName, double itemCost, int itemQty)
-        {
-            //  Create a modelles frame for the itemModal with the item name as the title.
-            itemFrame           =   new JFrame(itemName);
-
-            JPanel itemPanel    =   new JPanel(new GridLayout(0, 1));
-            JPanel itemInfo     =   new JPanel(new GridLayout(0, 2));
-            JPanel itemQtyModal =   new JPanel(new GridLayout(0, 3));
-
-            itemInfo.add(new JLabel("Item Name: ", SwingConstants.CENTER));
-            itemInfo.add(new JLabel(itemName, SwingConstants.CENTER));
-
-            itemInfo.add(new JLabel("Cost: ", SwingConstants.CENTER));
-
-            //  Required for double to String conversion.
-            itemInfo.add(new JLabel(String.valueOf(itemCost), SwingConstants.CENTER));
-
-            //  if item quantity is greater than 1, then it is a product.
-            if (itemQty > 0)
-            {
-                JButton removeQty   =   new JButton("-");
-
-                quantity            =   new JLabel(String.valueOf(itemQty), SwingConstants.CENTER);
-
-                JButton addQty      =   new JButton("+");
-
-                addQty.addActionListener(new ActionListener()
-                {
-                    public void actionPerformed(ActionEvent ae)
-                    {
-                        quantityCounter     =   incProductQuantity(quantityCounter);
-                    }
-                });
-
-                removeQty.addActionListener(new ActionListener()
-                {
-                    public void actionPerformed(ActionEvent ae)
-                    {
-                        quantityCounter     =   decProductQuantity(quantityCounter);
-                    }
-                });
-
-                itemQtyModal.add(removeQty);
-                itemQtyModal.add(quantity);
-                itemQtyModal.add(addQty);
-            }
-
-            itemPanel.add(itemInfo);
-            itemPanel.add(itemQtyModal);
-
-
-            //  Buttons for cancel and confirm item
-            modalButton         =   new JPanel(new GridLayout(1, 2));
-            JButton cancel      =   new JButton("Cancel");
-            JButton confirm     =   new JButton("Confirm");
-
-            modalButton.add(cancel);
-            modalButton.add(confirm);
-
-            cancel.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent ae)
-                {
-                    itemFrame.setVisible(false);
-                    itemFrame.dispose();
-                }
-            });
-
-            confirm.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent ae)
-                {
-                    setConfirmItem();
-                    itemFrame.setVisible(false);
-                    itemFrame.dispose();
-                }
-            });
-
-            itemFrame.setLayout(new BorderLayout());
-            itemFrame.setSize(300, 200);
-            itemFrame.setLocationRelativeTo(null);
-            itemFrame.setAlwaysOnTop(true);
-
-            itemFrame.add(itemPanel, BorderLayout.CENTER);
-            itemFrame.add(modalButton, BorderLayout.SOUTH);
-
-            itemFrame.setVisible(true);
-
-            itemWindow          =   new JDialog(itemFrame, itemName, true);
-        }
-
-        /*
-         *  @params     int     productQuantity
-         *
-         *  @brief
-         *
-         *  @return     int     productQuantity
-         */
-        public int incProductQuantity(int productQuantity)
-        {
-            productQuantity++;
-            quantity.setText(String.valueOf(productQuantity));
-
-            return productQuantity;
-        }
-
-        /*
-         *  @params     int     productQuantity
-         *
-         *  @brief
-         *
-         *  @return     int     productQuantity
-         */
-        public int decProductQuantity(int productQuantity)
-        {
-            if (productQuantity > 1)
-            {
-                productQuantity--;
-                quantity.setText(String.valueOf(productQuantity));
-
-                return productQuantity;
-            } else
-            {
-                return 1;
-            }
-        }
-
-        /*
-         *  @params     void
-         *
-         *  @brief
-         *  This method just compares the quantityCounter to 1, in order to check whether
-         *  it is a product, or a service; because services is not quantitative.
-         *
-         *  It then assigned the quantity to the product if it is a product, and adds
-         *  it to the checkout ArrayList of Item.
-         *
-         *  else it will add the service to the ArrayList of Item.
-         *
-         *  @return     void
-         */
-        public void setConfirmItem()
-        {
-            if (quantityCounter >= 1)
-            {
-                this.product.updateQuantity(quantityCounter);
-
-                checkout.add(this.product);
-            } else
-            {
-                checkout.add(this.service);
-            }
-
-            for (int i = 0; i < checkout.size(); i++)
-            {
-                System.out.println(checkout.get(i).getName());
-                System.out.println(checkout.get(i).getCost());
-                System.out.println(checkout.get(i).getQuantity());
-            }
-
-            displayCheckoutListing();
-            displayGrandTotal();
-        }
-    }
-
 }
