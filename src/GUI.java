@@ -216,8 +216,13 @@ class GUI extends JFrame
 
             int itemQuantity    =   checkout.get(i).getQuantity();
             double costPerItem  =   checkout.get(i).getCost();
+            
+            double totalPerItem =   0;
 
-            double totalPerItem =   itemQuantity * costPerItem;
+            if (itemQuantity > 0)
+                totalPerItem    =   itemQuantity * costPerItem;
+            else
+                totalPerItem    =   costPerItem;
 
             checkoutTotal       +=  totalPerItem;
         }
