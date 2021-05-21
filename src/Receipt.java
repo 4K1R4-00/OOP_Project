@@ -44,7 +44,6 @@ class Receipt
         else
         {
             receiptFolder.mkdir();
-            System.out.println("Folder creater");
 
             fileExist           =   receiptFolder.exists();
             return fileExist;
@@ -72,16 +71,10 @@ class Receipt
 
     private void receiptFormat()
     {
-        System.out.println(receiptFolder.getAbsolutePath());
-
-        String receiptPath  =   receiptFolder.getAbsolutePath() + "/" + receiptName();
-
-        System.out.println(receiptPath);
-
         try
         {
             //  Create the file object.
-            FileWriter receiptOutput       =   new FileWriter("test.txt");
+            FileWriter receiptOutput       =   new FileWriter("receipts/" + receiptName());
 
             //  Iterate through the checkout list, then print the items name, quantity and cost on receipt.
             for (int i = 0; i < checkoutList.size(); i++)
