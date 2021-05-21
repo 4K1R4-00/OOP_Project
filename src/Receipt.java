@@ -78,13 +78,10 @@ class Receipt
         {
             //  Create the file object.
             FileWriter receiptOutput       =   new FileWriter(receiptFolder.getAbsolutePath() + "/" + receiptName);
-<<<<<<< HEAD
-=======
 
             receiptOutput.write("===========================================\n");
             receiptOutput.write("       THANK YOU FOR COMING TO SALON       \n");
             receiptOutput.write("===========================================\n");
->>>>>>> app-gui-checkout
 
             //  Iterate through the checkout list, then print the items name, quantity and cost on receipt.
             for (int i = 0; i < checkoutList.size(); i++)
