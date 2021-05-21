@@ -33,7 +33,7 @@ class Receipt
      */
     private boolean checkReceiptFolderExist()
     {
-        receiptFolder           =   new File("../receipts/");
+        receiptFolder           =   new File("receipts/");
 
         boolean fileExist       =   receiptFolder.exists();
 
@@ -75,6 +75,8 @@ class Receipt
         System.out.println(receiptFolder.getAbsolutePath());
 
         String receiptPath  =   receiptFolder.getAbsolutePath() + "/" + receiptName();
+
+        System.out.println(receiptPath);
 
         try
         {
