@@ -10,6 +10,7 @@ class Receipt
 {
     private ArrayList<Item> checkoutList    =   new ArrayList<Item>(5);
     private File receiptFolder;
+    private String receiptName;
 
     //  Default object constructor
     Receipt() {}
@@ -33,9 +34,9 @@ class Receipt
      */
     private boolean checkReceiptFolderExist()
     {
-        receiptFolder           =   new File("receipts/");
+        this.receiptFolder      =   new File("receipts/");
 
-        boolean fileExist       =   receiptFolder.exists();
+        boolean fileExist       =   this.receiptFolder.exists();
 
         if (fileExist)
         {
@@ -43,9 +44,9 @@ class Receipt
         }
         else
         {
-            receiptFolder.mkdir();
+            this.receiptFolder.mkdir();
 
-            fileExist           =   receiptFolder.exists();
+            fileExist           =   this.receiptFolder.exists();
             return fileExist;
         }
     }
@@ -71,10 +72,12 @@ class Receipt
 
     private void receiptFormat()
     {
+        this.receiptName    =   receiptName();
+
         try
         {
             //  Create the file object.
-            FileWriter receiptOutput       =   new FileWriter("receipts/" + receiptName());
+            FileWriter receiptOutput       =   new FileWriter(receiptName);
 
             //  Iterate through the checkout list, then print the items name, quantity and cost on receipt.
             for (int i = 0; i < checkoutList.size(); i++)
@@ -92,7 +95,7 @@ class Receipt
             //  Close the file object before exit.
             receiptOutput.close();
 
-            System.out.println("Receipt " + " was generated.");
+            System.out.println("Receipt " + this.receiptName + " was generated.");
 
         } catch (IOException e)
         {
