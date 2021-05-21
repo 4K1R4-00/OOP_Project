@@ -37,6 +37,9 @@ class GUI extends JFrame
     private JPanel checkoutPanel        =   new JPanel(new BorderLayout(5, 10));
     private JPanel checkoutItemHead     =   new JPanel();
     private JPanel checkoutItemPanel    =   new JPanel();
+
+    private JLabel grandTotalLabel;
+
     private JScrollPane checkoutScroll  =   new JScrollPane(checkoutItemPanel,
                                                             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                                                             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
@@ -48,6 +51,7 @@ class GUI extends JFrame
     private ArrayList<Service> services;
 
     private ArrayList<Item> checkout    =   new ArrayList<Item>(5);
+    private double checkoutGrandTotal   =   0.0;
 
     // Default constructor
     GUI() {}
@@ -107,7 +111,9 @@ class GUI extends JFrame
         checkoutPanel.add(checkoutScroll, BorderLayout.CENTER);
 
         checkoutTotal.add(new JLabel("Grand Total: ", SwingConstants.CENTER));
-        checkoutTotal.add(new JLabel("$xxxxxxxx", SwingConstants.CENTER));
+
+        grandTotalLabel  =   new JLabel("RM 0.0", SwingConstants.CENTER);
+        checkoutTotal.add(grandTotalLabel);
 
         JButton checkoutButton  =   new JButton("Checkout");
         checkoutButton.addActionListener(new CheckoutListener());
@@ -169,6 +175,12 @@ class GUI extends JFrame
      *  @params     void
      *
      *  @brief
+     *  The method removes all the componenets of the panel, before reloading them back in
+     *  each item is based on the items in the checkout list.
+     *
+     *  After the items in the checkout list have been added to the checkout item panel.
+     *
+     *  the method revalidates, and redraws the entire checkout item panel
      *
      *  @return     void
      */
@@ -192,6 +204,40 @@ class GUI extends JFrame
         checkoutItemPanel.revalidate();
 
         checkoutItemPanel.repaint();
+    }
+
+
+    private void displayGrandTotal()
+    {
+        double checkoutTotal    =   0.0;
+
+        for (int i = 0; i < checkout.size(); i++)
+        {
+
+            int itemQuantity    =   checkout.get(i).getQuantity();
+            double costPerItem  =   checkout.get(i).getCost();
+
+            double totalPerItem =   itemQuantity * costPerItem;
+
+            checkoutTotal       +=  totalPerItem;
+        }
+
+        checkoutGrandTotal      =  checkoutTotal;
+
+        grandTotalLabel.setText("RM " + String.valueOf(this.checkoutGrandTotal));
+    }
+
+    public void resetCheckoutList()
+    {
+        checkoutGrandTotal     =   0.0;
+
+        checkout.clear();
+
+        checkoutItemPanel.removeAll();
+        checkoutItemPanel.revalidate();
+        checkoutItemPanel.repaint();
+
+        grandTotalLabel.setText("RM 0.0");
     }
 
     /*
@@ -245,7 +291,7 @@ class GUI extends JFrame
     /*
      *  @brief
      *  The CheckoutListener listens to the input event of the checkout button.
-     *  
+     *
      *  Prints the checkoutListing receipt.
      */
     class CheckoutListener implements ActionListener
@@ -254,6 +300,7 @@ class GUI extends JFrame
         {
             Receipt receipt     =   new Receipt(checkout);
             receipt.printReceipt();
+            resetCheckoutList();
         }
     }
 
@@ -464,6 +511,7 @@ class GUI extends JFrame
             }
 
             displayCheckoutListing();
+            displayGrandTotal();
         }
     }
 
