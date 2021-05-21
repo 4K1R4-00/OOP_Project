@@ -92,7 +92,7 @@ class Receipt
             //  Close the file object before exit.
             receiptOutput.close();
 
-            System.out.println("Receipt " + receiptPath + " was generated.");
+            System.out.println("Receipt " + " was generated.");
 
         } catch (IOException e)
         {
