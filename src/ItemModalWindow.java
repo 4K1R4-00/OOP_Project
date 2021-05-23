@@ -12,6 +12,8 @@ import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowEvent;
 
 /*
  *  @brief
@@ -20,7 +22,7 @@ import java.awt.event.ActionEvent;
  *  product or service is selected, in order to ensure the quantity and cost.
  *
  */
-class ItemModalWindow
+public class ItemModalWindow implements WindowListener
 {
     private JDialog itemWindow;
 
@@ -65,8 +67,9 @@ class ItemModalWindow
      *  @param      void
      *
      *  @brief
+     *  This method displays the dialog window for when a product item is the argument provided.
      *
-     *  @return void
+     *  @return     Product     this.product
      */
     public Product displayProductDialog()
     {
@@ -80,6 +83,14 @@ class ItemModalWindow
         return this.product;
     }
 
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *  This method displays the dialog window for when a service item is the provided argument.
+     *
+     *  @return     Service     this.service
+     */
     public Service displayServiceDialog()
     {
         displayItemDetail();
@@ -92,9 +103,12 @@ class ItemModalWindow
     }
 
     /*
+     *  @param      void
      *
+     *  @brief
+     *  The method displays the item detail for the Item Modal Window.
      *
-     *
+     *  @return     void
      */
     private void displayItemDetail()
     {
@@ -113,6 +127,7 @@ class ItemModalWindow
      *  @params
      *
      *  @brief
+     *  The method displays the quantity button and label for a product.
      *
      *  @return
      */
@@ -150,6 +165,14 @@ class ItemModalWindow
 
     }
 
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *  The method displays the cancel and confirm butto for the dialog window.
+     *
+     *  @return     void
+     */
     private void displayBottomButtons()
     {
         //  Buttons for cancel and confirm item
@@ -161,6 +184,7 @@ class ItemModalWindow
         modalButton.add(confirm);
 
         itemWindow          =   new JDialog(parentFrame, itemName, true);
+        itemWindow.addWindowListener(this);
 
         cancel.addActionListener(new ActionListener()
         {
@@ -168,6 +192,8 @@ class ItemModalWindow
             {
                 service     =   null;
                 product     =   null;
+
+                itemWindow.setVisible(false);
                 itemWindow.dispose();
             }
         });
@@ -177,6 +203,7 @@ class ItemModalWindow
             public void actionPerformed(ActionEvent ae)
             {
                 setConfirmItem();
+
                 itemWindow.setVisible(false);
                 itemWindow.dispose();
             }
@@ -246,5 +273,57 @@ class ItemModalWindow
     private void setConfirmItem()
     {
         this.product.updateQuantity(quantityCounter);
+    }
+
+    /*
+     *  @brief
+     *  Below method is the required method to be declared in order to implement
+     *  the WindowListener class.
+     *
+     *  In this instance we are only using the window on close method to assign
+     *  a null value to the product and service if not selected.
+     */
+    @Override
+    public void windowOpened(WindowEvent e)
+    {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e)
+    {
+        product     =   null;
+        service     =   null;
+        itemWindow.dispose();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e)
+    {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e)
+    {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e)
+    {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e)
+    {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e)
+    {
+
     }
 }

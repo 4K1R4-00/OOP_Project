@@ -261,12 +261,17 @@ class GUI extends JFrame
     /*
      *  @brief
      *  The MenuListener class listens for events that occur in the menubar.
+     *
+     *  Instentiating the SettingModalWindow class
      */
     class SettingMenuListener implements ActionListener
     {
         public void actionPerformed(ActionEvent ae)
         {
-            System.out.println("The setting button has been pressed");
+            GUI parentFrame     =   new GUI();
+
+            SettingModalWindow settingDialog    =   new SettingModalWindow(parentFrame);
+            settingDialog.displaySettingDialog();
         }
     }
 

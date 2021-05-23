@@ -1,8 +1,7 @@
 class Product extends Item
 {
-    char pGenderType;
-    String pCategory;
-
+    //  Item type of product
+    private int type    =   1;
 
     Product(String productName, double productCost)
     {
@@ -10,41 +9,15 @@ class Product extends Item
     }
 
     Product(String productName,
-            String productCategory,
             int productQuantity,
-            double productCost,
-            char productGenderType
-
+            double productCost
             )
     {
         super(productName, productCost, productQuantity);
-        this.pGenderType    =   productGenderType;
-        this.pCategory      =   productCategory;
-
-
     }
 
-    public void updateGenderType(char updateItemType)
+    public int getType()
     {
-        this.pGenderType    =   updateItemType;
+        return this.type;
     }
-
-    public void updateCategory(String updateItemCategory)
-    {
-        this.pCategory      =   updateItemCategory;
-    }
-
-    public char getGenderType()
-    {
-        return pGenderType;
-    }
-
-    public String getCategory()
-    {
-        return pCategory;
-    }
-
-
-
-
 }
