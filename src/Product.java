@@ -1,6 +1,15 @@
 class Product extends Item
 {
-    Product(String productName, double productCost)
+    /*
+     *  @param      String  productName
+     *  @param      double  productCost
+     *
+     *  @brief
+     *  Constructor
+     *
+     *  @return     none
+     */
+    public Product(String productName, double productCost)
     {
         super(productName, productCost);
     }

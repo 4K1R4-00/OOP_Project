@@ -1,6 +1,9 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
+import javax.swing.JList;
+import javax.swing.DefaultListModel;
 import javax.swing.SwingConstants;
 
 import javax.swing.JScrollPane;
@@ -12,7 +15,6 @@ import javax.swing.JMenuItem;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import javax.swing.BoxLayout;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -32,21 +34,22 @@ class GUI extends JFrame
 
     private JPanel checkoutPanel        =   new JPanel(new BorderLayout(5, 10));
     private JPanel checkoutItemHead     =   new JPanel();
-    private JPanel checkoutItemPanel    =   new JPanel();
 
     private JLabel grandTotalLabel;
 
-    private JScrollPane checkoutScroll  =   new JScrollPane(checkoutItemPanel,
+    private DefaultListModel<String> checkoutListing    =   new DefaultListModel<String>();
+    private JList<String> checkoutListingDisplayed      =   new JList<String>();
+
+    private JScrollPane checkoutScroll  =   new JScrollPane(checkoutListingDisplayed,
                                                             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                                                             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
                                                             );
+
     private JPanel checkoutTotal        =   new JPanel(new GridLayout(0, 2, 5, 5));
 
     // Product list and service list
     private ArrayList<Product> products;
     private ArrayList<Service> services;
-
-    private ArrayList<Item> checkout    =   new ArrayList<Item>(5);
 
     private ArrayList<Product> productCheckout      =   new ArrayList<Product>(5);
     private ArrayList<Service> serviceCheckout      =   new ArrayList<Service>(5);
@@ -85,16 +88,22 @@ class GUI extends JFrame
         //  Menu bar
         JMenuBar menuBar    =   new JMenuBar();
         JMenu systemMenu    =   new JMenu("System");
+        JMenu settingMenu   =   new JMenu("Setting");
 
-        JMenuItem setting   =   new JMenuItem("Setting");
-        JMenuItem info      =   new JMenuItem("Information");
+        JMenuItem product   =   new JMenuItem("Product");
+        JMenuItem service   =   new JMenuItem("Service");
 
-        setting.addActionListener(new SettingMenuListener());
+        JMenuItem info      =   new JMenuItem("Statistics");
+
         info.addActionListener(new InfoMenuListener());
 
         systemMenu.add(info);
-        systemMenu.add(setting);
+
+        settingMenu.add(product);
+        settingMenu.add(service);
+
         menuBar.add(systemMenu);
+        menuBar.add(settingMenu);
 
         //  Set the menu bar
         this.setJMenuBar(menuBar);
@@ -108,7 +117,6 @@ class GUI extends JFrame
         checkoutItemHead.add(new JLabel("----------- Salon Checkout Panel ----------"));
         checkoutPanel.add(checkoutItemHead, BorderLayout.NORTH);
 
-        checkoutItemPanel.setLayout(new BoxLayout(checkoutItemPanel, BoxLayout.Y_AXIS));
         checkoutPanel.add(checkoutScroll, BorderLayout.CENTER);
 
         checkoutTotal.add(new JLabel("Grand Total: ", SwingConstants.CENTER));
@@ -186,38 +194,31 @@ class GUI extends JFrame
      */
     private void getCheckoutListing()
     {
-        checkoutItemPanel.removeAll();
+        checkoutListing.clear();
 
         for (int i = 0; i < productCheckout.size(); i++)
         {
-            JPanel checkoutItem     =   new JPanel();
-            checkoutItem.setLayout(new GridLayout(0, 3));
+            String productInformation   =   productCheckout.get(i).getName() + "     x" +
+                                            productCheckout.get(i).getQuantity() + "   RM " +
+                                            productCheckout.get(i).getCost();
 
-            checkoutItem.add(new JLabel(productCheckout.get(i).getName(), SwingConstants.LEFT));
-            checkoutItem.add(new JLabel("x" + String.valueOf(productCheckout.get(i).getQuantity()),
-                                        SwingConstants.CENTER));
-
-            checkoutItem.add(new JLabel(String.valueOf(productCheckout.get(i).getCost()), SwingConstants.RIGHT));
-
-            checkoutItemPanel.add(checkoutItem);
+            checkoutListing.addElement(productInformation);
         }
 
         for (int i = 0; i < serviceCheckout.size(); i++)
         {
-            JPanel checkoutItem     =   new JPanel();
-            checkoutItem.setLayout(new GridLayout(0, 3));
+            String serviceInformation   =   serviceCheckout.get(i).getName() + "     x" +
+                                            serviceCheckout.get(i).getQuantity() + "   RM " +
+                                            serviceCheckout.get(i).getCost();
 
-            checkoutItem.add(new JLabel(serviceCheckout.get(i).getName(), SwingConstants.LEFT));
-            checkoutItem.add(new JLabel("x" + String.valueOf(serviceCheckout.get(i).getQuantity()),
-                                       SwingConstants.CENTER));
-
-            checkoutItem.add(new JLabel(String.valueOf(serviceCheckout.get(i).getCost()), SwingConstants.RIGHT));
-
-            checkoutItemPanel.add(checkoutItem);
+            checkoutListing.addElement(serviceInformation);
         }
 
-        checkoutItemPanel.revalidate();
-        checkoutItemPanel.repaint();
+        //checkoutListingDisplayed.setModel(checkoutListing);
+        checkoutListingDisplayed.setModel(checkoutListing);
+
+        checkoutScroll.revalidate();
+        checkoutScroll.repaint();
     }
 
     private void getGrandTotal()
@@ -255,10 +256,10 @@ class GUI extends JFrame
 
         productCheckout.clear();
         serviceCheckout.clear();
+        checkoutListing.clear();
 
-        checkoutItemPanel.removeAll();
-        checkoutItemPanel.revalidate();
-        checkoutItemPanel.repaint();
+        checkoutScroll.revalidate();
+        checkoutScroll.repaint();
 
         grandTotalLabel.setText("RM 0.0");
     }

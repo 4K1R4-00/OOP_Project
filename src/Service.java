@@ -8,39 +8,94 @@ public class Service extends Item
 
     public Service() {}
 
+    /*
+     *  @param      String  serviceName
+     *  @param      double  serviceCost
+     *
+     *  @brief
+     *
+     *  @return     none
+     */
     public Service(String serviceName, double serviceCost)
     {
         super(serviceName, serviceCost);
     }
 
-    Service(String serviceName, double serviceCost, LocalDate appointDate, int appointType, int serviceQuantity)
-    {
-        super(serviceName, serviceCost);
-
-    }
-
-    Service(String serviceName, double serviceCost, int appointmentType)
+    /*
+     *  @param      String  serviceName
+     *  @param      double  serviceCost
+     *  @param      int     appointmentType
+     *
+     *  @brief
+     *
+     *  @return     none
+     */
+    public Service(String serviceName, double serviceCost, int appointmentType)
     {
         super(serviceName, serviceCost);
 
         this.appointmentType    =   appointmentType;
     }
 
+    /*
+     *  @param      String      serviceName
+     *  @param      double      serviceCost
+     *  @param      LocalDate   appointDate
+     *  @param      int         appointType
+     *  @param      int         serviceQuantity
+     *
+     *  @brief
+     *
+     *  @return     none
+     */
+    public Service(String serviceName, double serviceCost, LocalDate appointDate, int appointType, int serviceQuantity)
+    {
+        super(serviceName, serviceCost);
+    }
+
+    /*
+     *  @param      int     setAppointmentType
+     *
+     *  @brief
+     *
+     *  @return     void
+     */
     public void setServiceAppointmentType(int setAppointmentType)
     {
         this.appointmentType    =   setAppointmentType;
     }
 
+    /*
+     *  @param      String  setAppointmentDate
+     *
+     *  @brief
+     *
+     *  @return     void
+     */
     public void setServiceAppointmentDate(String setAppointmentDate)
     {
         this.appointmentDate    =   LocalDate.parse(setAppointmentDate, this.dateFormat);
     }
 
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *
+     *  @return     LocalDate
+     */
     public LocalDate getServiceAppointmentDate()
     {
         return this.appointmentDate;
     }
 
+    /*
+     *  @params     void
+     *
+     *  @brief
+     *
+     *  @return     int
+     */
     public int getServiceAppointmentType()
     {
         return this.appointmentType;

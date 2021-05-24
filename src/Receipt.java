@@ -101,7 +101,7 @@ class Receipt
             for (int i = 0; i < this.productList.size(); i++)
             {
                 String itemOutput   =   String.format("%s          Qty %d            RM %s \n",
-                                                       this.productList.get(i).getName(),
+                                                       this.productList.get(i).getName().substring(0, 6),
                                                        this.productList.get(i).getQuantity(),
                                                        df.format(this.productList.get(i).getCost()));
 
@@ -110,8 +110,8 @@ class Receipt
 
             for (int i = 0; i < this.serviceList.size(); i++)
             {
-                String itemOutput   =   String.format("%s          Qty x%d          RM %s \n",
-                                                       this.serviceList.get(i).getName(),
+                String itemOutput   =   String.format("%s          Qty %d            RM %s \n",
+                                                       this.serviceList.get(i).getName().substring(0, 6),
                                                        this.serviceList.get(i).getQuantity(),
                                                        df.format(this.serviceList.get(i).getCost()));
 
