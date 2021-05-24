@@ -14,7 +14,7 @@ class Item
     private double cost;
 
     //  Item quantity
-    private int quantity;
+    private int quantity    =   1;
 
     //  Default constructor
     Item () {}
@@ -35,20 +35,31 @@ class Item
 
     /*
      *  @param  float updateItemCost
+     *  
+     *  @brief
+     *  set the cost of the item.
      *
      *  @return void
      */
-    public void updateCost(double updatedItemCost)
+    public void setCost(double updatedItemCost)
     {
         this.cost   =   updatedItemCost;
     }
 
-    public void updateName(String updateItemName)
+    /*
+     *  @param float updateItemName
+     *
+     *  @brief
+     *  set the item name.
+     *
+     *  @return void
+     */
+    public void setName(String updateItemName)
     {
         this.name   =   updateItemName;
     }
 
-    public void updateQuantity(int quantity)
+    public void setQuantity(int quantity)
     {
         this.quantity   =   quantity;
     }
