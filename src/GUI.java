@@ -288,7 +288,10 @@ class GUI extends JFrame
     {
         public void actionPerformed(ActionEvent ae)
         {
-            System.out.println("The info button has been pressed");
+//            System.out.println("The info button has been pressed");
+            GUI parentFrame =   new GUI();
+            AboutModalWindow aboutDialog    =   new AboutModalWindow(parentFrame);
+            aboutDialog.displayInfo();
         }
     }
     /*
