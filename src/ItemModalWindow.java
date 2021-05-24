@@ -35,8 +35,9 @@ public class ItemModalWindow implements WindowListener
     private JPanel itemPanel    =   new JPanel(new GridLayout(0, 1));
     private JPanel itemInfo     =   new JPanel(new GridLayout(0, 2));
     private JPanel itemQtyPanel =   new JPanel(new GridLayout(0, 3));
-    private JPanel itemAppointmentPanel     =   new JPanel(new GridLayout(0, 2));
 
+    private JPanel itemAppointmentPanel         =   new JPanel(new GridLayout(0, 2));
+    private JTextField appointmentDateInput     =   new JTextField();
 
     private Service service;
     private Product product;
@@ -179,8 +180,14 @@ public class ItemModalWindow implements WindowListener
         itemAppointmentPanel.add(appointmentType);
         itemAppointmentPanel.add(appointmentTypeInput);
 
-        JLabel appointmentDate              =   new JLabel("Date (dd/MM/yyyy):");
-        JTextField appointmentDateInput     =   new JTextField();
+        JLabel appointmentDate              =   new JLabel("Date (dd-MM-yyyy):");
+
+        appointmentDateInput.setEditable(false);
+
+        itemAppointmentPanel.add(appointmentDate);
+        itemAppointmentPanel.add(appointmentDateInput);
+
+        serviceAppointmentDate  =   appointmentDateInput.getText();
 
         appointmentTypeInput.addActionListener(new ActionListener()
         {
@@ -192,15 +199,14 @@ public class ItemModalWindow implements WindowListener
                 {
                     serviceAppointmentType  =   "Scheduled";
 
-                    itemAppointmentPanel.add(appointmentDate);
-                    itemAppointmentPanel.add(appointmentDateInput);
+                    appointmentDateInput.setEditable(true);
 
                     itemAppointmentPanel.revalidate();
                     itemAppointmentPanel.repaint();
                 } else {
                     serviceAppointmentType  =   "Walk-in";
-                    itemAppointmentPanel.remove(appointmentDate);
-                    itemAppointmentPanel.remove(appointmentDateInput);
+
+                    appointmentDateInput.setEditable(false);
 
                     itemAppointmentPanel.revalidate();
                     itemAppointmentPanel.repaint();
@@ -208,13 +214,6 @@ public class ItemModalWindow implements WindowListener
             }
         });
 
-        appointmentDateInput.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent ae)
-            {
-                serviceAppointmentDate      =   appointmentDateInput.getText();
-            }
-        });
     }
 
     /*
@@ -254,6 +253,7 @@ public class ItemModalWindow implements WindowListener
         {
             public void actionPerformed(ActionEvent ae)
             {
+
                 setConfirmItem();
 
                 itemWindow.setVisible(false);
@@ -331,6 +331,8 @@ public class ItemModalWindow implements WindowListener
         {
             if (serviceAppointmentType == "Scheduled")
             {
+                serviceAppointmentDate  =   appointmentDateInput.getText();
+
                 this.service.setServiceAppointmentType(1);
                 this.service.setServiceAppointmentDate(serviceAppointmentDate);
             } else {

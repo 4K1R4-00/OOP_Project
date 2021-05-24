@@ -1,9 +1,9 @@
-import java.util.Date;
-import java.text.SimpleDateFormat;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 public class Service extends Item
 {
-    private Date appointmentDate;
+    private LocalDate appointmentDate;
+    private DateTimeFormatter dateFormat    =   DateTimeFormatter.ofPattern("dd-MM-uuuu");
     private int appointmentType;
 
     public Service() {}
@@ -13,7 +13,7 @@ public class Service extends Item
         super(serviceName, serviceCost);
     }
 
-    Service(String serviceName, double serviceCost, Date appointDate, int appointType, int serviceQuantity)
+    Service(String serviceName, double serviceCost, LocalDate appointDate, int appointType, int serviceQuantity)
     {
         super(serviceName, serviceCost);
 
@@ -31,23 +31,12 @@ public class Service extends Item
         this.appointmentType    =   setAppointmentType;
     }
 
-    public void setServiceAppointmentDate(Date setAppointmentDate)
-    {
-        this.appointmentDate    =   setAppointmentDate;
-    }
-
     public void setServiceAppointmentDate(String setAppointmentDate)
     {
-        try
-        {
-            this.appointmentDate    =   new SimpleDateFormat("dd/MM/yyyy").parse(setAppointmentDate);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        this.appointmentDate    =   LocalDate.parse(setAppointmentDate, this.dateFormat);
     }
 
-    public Date getServiceAppointmentDate()
+    public LocalDate getServiceAppointmentDate()
     {
         return this.appointmentDate;
     }
