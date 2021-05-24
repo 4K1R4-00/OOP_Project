@@ -3,6 +3,8 @@ import javax.swing.JPanel;
 import javax.swing.JDialog;
 
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
 import javax.swing.JButton;
 
 import java.awt.GridLayout;
@@ -32,9 +34,9 @@ public class ItemModalWindow implements WindowListener
 
     private JPanel itemPanel    =   new JPanel(new GridLayout(0, 1));
     private JPanel itemInfo     =   new JPanel(new GridLayout(0, 2));
-    private JPanel itemQtyModal =   new JPanel(new GridLayout(0, 3));
+    private JPanel itemQtyPanel =   new JPanel(new GridLayout(0, 3));
+    private JPanel itemAppointmentPanel     =   new JPanel(new GridLayout(0, 2));
 
-    private int quantityCounter =   1;
 
     private Service service;
     private Product product;
@@ -42,6 +44,12 @@ public class ItemModalWindow implements WindowListener
     private String itemName;
     private double itemCost;
     private int itemQuantity;
+
+    //  Global class variable to change the quantity.
+    private int quantityCounter =   1;
+
+    private String serviceAppointmentType;
+    private String serviceAppointmentDate;
 
     ItemModalWindow(JFrame parentFrame, Product product)
     {
@@ -76,7 +84,7 @@ public class ItemModalWindow implements WindowListener
         displayItemDetail();
 
         displayQuantityButton();
-        itemPanel.add(itemQtyModal);
+        itemPanel.add(itemQtyPanel);
 
         displayBottomButtons();
 
@@ -95,7 +103,8 @@ public class ItemModalWindow implements WindowListener
     {
         displayItemDetail();
 
-        itemPanel.add(itemQtyModal);
+        displayAppointmentPanel();
+        itemPanel.add(itemAppointmentPanel);
 
         displayBottomButtons();
 
@@ -133,36 +142,79 @@ public class ItemModalWindow implements WindowListener
      */
     private void displayQuantityButton()
     {
-        //  if item quantity is greater than 1, then it is a product.
-        if (itemQuantity > 0)
+        JButton removeQty   =   new JButton("-");
+        quantity            =   new JLabel(String.valueOf(itemQuantity), SwingConstants.CENTER);
+
+        JButton addQty      =   new JButton("+");
+
+        addQty.addActionListener(new ActionListener()
         {
-            JButton removeQty   =   new JButton("-");
-
-            quantity            =   new JLabel(String.valueOf(itemQuantity), SwingConstants.CENTER);
-
-            JButton addQty      =   new JButton("+");
-
-            addQty.addActionListener(new ActionListener()
+            public void actionPerformed(ActionEvent ae)
             {
-                public void actionPerformed(ActionEvent ae)
-                {
-                    quantityCounter     =   incProductQuantity(quantityCounter);
-                }
-            });
+                quantityCounter     =   incProductQuantity(quantityCounter);
+            }
+        });
 
-            removeQty.addActionListener(new ActionListener()
+        removeQty.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
             {
-                public void actionPerformed(ActionEvent ae)
+                quantityCounter     =   decProductQuantity(quantityCounter);
+            }
+        });
+
+        itemQtyPanel.add(removeQty);
+        itemQtyPanel.add(quantity);
+        itemQtyPanel.add(addQty);
+    }
+
+    private void displayAppointmentPanel()
+    {
+        JLabel appointmentType                      =   new JLabel("Appointment Type:");
+        JComboBox<String> appointmentTypeInput      =   new JComboBox<String>();
+
+        appointmentTypeInput.addItem("Walk-in");
+        appointmentTypeInput.addItem("Scheduled");
+
+        itemAppointmentPanel.add(appointmentType);
+        itemAppointmentPanel.add(appointmentTypeInput);
+
+        JLabel appointmentDate              =   new JLabel("Date (dd/MM/yyyy):");
+        JTextField appointmentDateInput     =   new JTextField();
+
+        appointmentTypeInput.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                String selected     =   appointmentTypeInput.getItemAt(appointmentTypeInput.getSelectedIndex());
+
+                if (selected == "Scheduled")
                 {
-                    quantityCounter     =   decProductQuantity(quantityCounter);
+                    serviceAppointmentType  =   "Scheduled";
+
+                    itemAppointmentPanel.add(appointmentDate);
+                    itemAppointmentPanel.add(appointmentDateInput);
+
+                    itemAppointmentPanel.revalidate();
+                    itemAppointmentPanel.repaint();
+                } else {
+                    serviceAppointmentType  =   "Walk-in";
+                    itemAppointmentPanel.remove(appointmentDate);
+                    itemAppointmentPanel.remove(appointmentDateInput);
+
+                    itemAppointmentPanel.revalidate();
+                    itemAppointmentPanel.repaint();
                 }
-            });
+            }
+        });
 
-            itemQtyModal.add(removeQty);
-            itemQtyModal.add(quantity);
-            itemQtyModal.add(addQty);
-        }
-
+        appointmentDateInput.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                serviceAppointmentDate      =   appointmentDateInput.getText();
+            }
+        });
     }
 
     /*
@@ -272,7 +324,21 @@ public class ItemModalWindow implements WindowListener
      */
     private void setConfirmItem()
     {
-        this.product.updateQuantity(quantityCounter);
+        if (this.product != null)
+        {
+            this.product.setQuantity(quantityCounter);
+        } else
+        {
+            if (serviceAppointmentType == "Scheduled")
+            {
+                this.service.setServiceAppointmentType(1);
+                this.service.setServiceAppointmentDate(serviceAppointmentDate);
+            } else {
+                this.service.setServiceAppointmentType(0);
+            }
+
+            this.service.setQuantity(1);
+        }
     }
 
     /*
