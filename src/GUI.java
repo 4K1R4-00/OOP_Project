@@ -373,7 +373,7 @@ class GUI extends JFrame
     {
         public void actionPerformed(ActionEvent ae)
         {
-            Receipt receipt     =   new Receipt(productCheckout, serviceCheckout);
+            Receipt receipt     =   new Receipt(productCheckout, serviceCheckout, checkoutGrandTotal);
             receipt.generateReceipt();
             clearCheckoutList();
         }

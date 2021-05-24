@@ -18,14 +18,18 @@ class Receipt
 
     private ArrayList<Product> productList  =   new ArrayList<Product>(5);
     private ArrayList<Service> serviceList  =   new ArrayList<Service>(5);
+    private double grandTotal;
 
     //  Default object constructor
     Receipt() {}
 
-    Receipt(ArrayList<Product> checkoutProductList, ArrayList<Service> checkoutServiceList)
+    Receipt(ArrayList<Product> checkoutProductList,
+            ArrayList<Service> checkoutServiceList,
+            double checkoutGrandTotal)
     {
         this.productList    =   checkoutProductList;
         this.serviceList    =   checkoutServiceList;
+        this.grandTotal     =   checkoutGrandTotal;
     }
 
     /*
@@ -128,8 +132,11 @@ class Receipt
                 receiptOutput.write(itemAppointment);
             }
 
+            String grandTotalFormat     =   String.format("Grand Total:                     RM %s \n",
+                                                            df.format(grandTotal));
+
             receiptOutput.write("===========================================\n");
-            receiptOutput.write("Grand Total:                               \n");
+            receiptOutput.write(grandTotalFormat);
             receiptOutput.write("===========================================\n");
 
             //  Close the file object before exit.
