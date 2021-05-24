@@ -208,9 +208,16 @@ class GUI extends JFrame
             checkoutItem.setLayout(new GridLayout(0, 3));
 
             checkoutItem.add(new JLabel(serviceCheckout.get(i).getName(), SwingConstants.LEFT));
-            checkoutItem.add(new JLabel(" ", SwingConstants.CENTER));
+            checkoutItem.add(new JLabel("x" + String.valueOf(serviceCheckout.get(i).getQuantity()),
+                                       SwingConstants.CENTER));
 
             checkoutItem.add(new JLabel(String.valueOf(serviceCheckout.get(i).getCost()), SwingConstants.RIGHT));
+
+            System.out.println(serviceCheckout.get(i).getName());
+            System.out.println(serviceCheckout.get(i).getCost());
+            System.out.println(serviceCheckout.get(i).getQuantity());
+            System.out.println(serviceCheckout.get(i).getServiceAppointmentType());
+            System.out.println(serviceCheckout.get(i).getServiceAppointmentDate());
 
             checkoutItemPanel.add(checkoutItem);
         }
@@ -219,22 +226,26 @@ class GUI extends JFrame
         checkoutItemPanel.repaint();
     }
 
-    private void displayGrandTotal()
+    private void getGrandTotal()
     {
         double checkoutTotal    =   0.0;
 
-        for (int i = 0; i < checkout.size(); i++)
+        for (int i = 0; i < productCheckout.size(); i++)
         {
+            int itemQuantity    =   productCheckout.get(i).getQuantity();
+            double costPerItem  =   productCheckout.get(i).getCost();
 
-            int itemQuantity    =   checkout.get(i).getQuantity();
-            double costPerItem  =   checkout.get(i).getCost();
+            double totalPerItem =   itemQuantity * costPerItem;
 
-            double totalPerItem =   0;
+            checkoutTotal       +=  totalPerItem;
+        }
 
-            if (itemQuantity > 0)
-                totalPerItem    =   itemQuantity * costPerItem;
-            else
-                totalPerItem    =   costPerItem;
+        for (int i = 0; i < serviceCheckout.size(); i++)
+        {
+            int itemQuantity    =   serviceCheckout.get(i).getQuantity();
+            double costPerItem  =   serviceCheckout.get(i).getCost();
+
+            double totalPerItem =   itemQuantity * costPerItem;
 
             checkoutTotal       +=  totalPerItem;
         }
@@ -244,7 +255,7 @@ class GUI extends JFrame
         grandTotalLabel.setText("RM " + String.valueOf(this.checkoutGrandTotal));
     }
 
-    private void resetCheckoutList()
+    private void clearCheckoutList()
     {
         checkoutGrandTotal     =   0.0;
 
@@ -304,37 +315,55 @@ class GUI extends JFrame
             int itemID          =   Integer.parseInt(ae.getActionCommand());
             int productMaxSize  =   products.size();
 
+            //  if the item ID is lesser than the max size of product arraylist.
             if (itemID < productMaxSize)
             {
+                //  Get the product ID and product information
                 int productID               =   itemID;
                 Product selectedProduct     =   products.get(productID);
 
+                //  Pass it to the product dialog model.
                 GUI parentFrame                 =   new GUI();
                 ItemModalWindow productDialog   =   new ItemModalWindow(parentFrame, selectedProduct);
 
+                //  Once done, return the product object.
                 Product item    =   productDialog.displayProductDialog();
 
+                //  Check if the product information is empty, if not empty then add to the
+                //  product checkout list.
                 if (item !=  null)
                     productCheckout.add(item);
 
+                //  Refresh the checkout list, using revalidate and repaint
                 getCheckoutListing();
-                displayGrandTotal();
 
+                //  Add to the grand total.
+                getGrandTotal();
+
+            //  if the itemID is greater than the max isze of the product arraylist, then its a service.
             } else if (itemID >= productMaxSize)
             {
+                //  Get the service ID by subtracting the product list max size and the current item ID
                 int serviceID               =   itemID - productMaxSize;
                 Service selectedService     =   services.get(serviceID);
 
+                //  Pass it to the service dialog model.
                 GUI parentFrame                 =   new GUI();
                 ItemModalWindow serviceDialog   =   new ItemModalWindow(parentFrame, selectedService);
 
+                // Once done, return the service object.
                 Service item    =   serviceDialog.displayServiceDialog();
 
+                //  Check if the service information is empty, if not empty then add to the
+                //  service checkout list.
                 if (item != null)
                     serviceCheckout.add(item);
 
+                //  Refresh checkout list, using revalidate and repaint.
                 getCheckoutListing();
-                displayGrandTotal();
+
+                //  Add to the grand total.
+                getGrandTotal();
             }
         }
     }
@@ -351,7 +380,7 @@ class GUI extends JFrame
         {
             Receipt receipt     =   new Receipt(checkout);
             receipt.generateReceipt();
-            resetCheckoutList();
+            clearCheckoutList();
         }
     }
 }
