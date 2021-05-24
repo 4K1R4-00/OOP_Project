@@ -276,7 +276,7 @@ class GUI extends JFrame
             GUI parentFrame     =   new GUI();
 
             SettingModalWindow settingDialog    =   new SettingModalWindow(parentFrame);
-            settingDialog.displaySettingDialog();
+            settingDialog.displayServiceSetting();
         }
     }
 
@@ -372,7 +372,7 @@ class GUI extends JFrame
     {
         public void actionPerformed(ActionEvent ae)
         {
-            Receipt receipt     =   new Receipt(checkout);
+            Receipt receipt     =   new Receipt(productCheckout, serviceCheckout);
             receipt.generateReceipt();
             clearCheckoutList();
         }

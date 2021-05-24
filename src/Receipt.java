@@ -1,6 +1,11 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.text.NumberFormat;
+import java.text.DecimalFormat;
+import java.math.RoundingMode;
+
 import java.util.ArrayList;
 
 import java.time.LocalDateTime;
@@ -11,14 +16,16 @@ class Receipt
     private File receiptFolder;
     private String receiptName;
 
-    private ArrayList<Item> receiptItemList    =   new ArrayList<Item>(5);
+    private ArrayList<Product> productList  =   new ArrayList<Product>(5);
+    private ArrayList<Service> serviceList  =   new ArrayList<Service>(5);
 
     //  Default object constructor
     Receipt() {}
 
-    Receipt(ArrayList<Item> receiptItemList)
+    Receipt(ArrayList<Product> checkoutProductList, ArrayList<Service> checkoutServiceList)
     {
-        this.receiptItemList       =   receiptItemList;
+        this.productList    =   checkoutProductList;
+        this.serviceList    =   checkoutServiceList;
     }
 
     /*
@@ -75,8 +82,15 @@ class Receipt
     {
         this.receiptName    =   receiptName();
 
+        NumberFormat df     =   DecimalFormat.getInstance();
+
+        df.setMinimumFractionDigits(2);
+        df.setMaximumFractionDigits(4);
+        df.setRoundingMode(RoundingMode.DOWN);
+
         try
         {
+
             //  Create the file object.
             FileWriter receiptOutput       =   new FileWriter(receiptFolder.getAbsolutePath() + "/" + receiptName);
 
@@ -84,17 +98,34 @@ class Receipt
             receiptOutput.write("       THANK YOU FOR COMING TO SALON       \n");
             receiptOutput.write("===========================================\n");
 
-            //  Iterate through the checkout list, then print the items name, quantity and cost on receipt.
-            for (int i = 0; i < receiptItemList.size(); i++)
+            for (int i = 0; i < this.productList.size(); i++)
             {
-                Item item   =   receiptItemList.get(i);
-
-                String itemOutput   =   item.getName() +
-                                        "   X" + item.getQuantity() +
-                                        "  RM" + item.getCost() +
-                                        "\n";
+                String itemOutput   =   String.format("%s          Qty %d            RM %s \n",
+                                                       this.productList.get(i).getName(),
+                                                       this.productList.get(i).getQuantity(),
+                                                       df.format(this.productList.get(i).getCost()));
 
                 receiptOutput.write(itemOutput);
+            }
+
+            for (int i = 0; i < this.serviceList.size(); i++)
+            {
+                String itemOutput   =   String.format("%s          Qty x%d          RM %s \n",
+                                                       this.serviceList.get(i).getName(),
+                                                       this.serviceList.get(i).getQuantity(),
+                                                       df.format(this.serviceList.get(i).getCost()));
+
+                String itemAppointment  =   "";
+                if (this.serviceList.get(i).getServiceAppointmentType() == 1)
+                {
+                    itemAppointment     =   String.format("Scheduled:                       %s \n\n",
+                                                            this.serviceList.get(i).getServiceAppointmentDate());
+                } else {
+                    itemAppointment     =   String.format("Scheduled:                       Walk-in \n\n");
+                }
+
+                receiptOutput.write(itemOutput);
+                receiptOutput.write(itemAppointment);
             }
 
             receiptOutput.write("===========================================\n");

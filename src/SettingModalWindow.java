@@ -44,13 +44,27 @@ public class SettingModalWindow
         JTextField serviceName      =   new JTextField();
 
         JLabel serviceCostLabel     =   new JLabel("Service Cost:");
-        JTextField serviceCOst      =   new JTextField();
+        JTextField serviceCost      =   new JTextField();
+        
+        inputPanel.add(serviceNameLabel);
+        inputPanel.add(serviceName);
+
+        inputPanel.add(serviceCostLabel);
+        inputPanel.add(serviceCost);
 
         displaySettingDialog();
 
         return this.serviceList;
     }
 
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *
+     *
+     *  @return     Product
+     */
     public Product displayProductSetting()
     {
         JLabel productNameLabel     =   new JLabel("Product Name:");
