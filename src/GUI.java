@@ -213,12 +213,6 @@ class GUI extends JFrame
 
             checkoutItem.add(new JLabel(String.valueOf(serviceCheckout.get(i).getCost()), SwingConstants.RIGHT));
 
-            System.out.println(serviceCheckout.get(i).getName());
-            System.out.println(serviceCheckout.get(i).getCost());
-            System.out.println(serviceCheckout.get(i).getQuantity());
-            System.out.println(serviceCheckout.get(i).getServiceAppointmentType());
-            System.out.println(serviceCheckout.get(i).getServiceAppointmentDate());
-
             checkoutItemPanel.add(checkoutItem);
         }
 
