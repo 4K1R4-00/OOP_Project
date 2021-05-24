@@ -115,14 +115,14 @@ class App
     {
         if (type == "product")
         {
-            products.get(index).updateName(itemName);
-            products.get(index).updateCost(itemCost);
+            products.get(index).setName(itemName);
+            products.get(index).setCost(itemCost);
         }
 
         if (type == "service")
         {
-            services.get(index).updateName(itemName);
-            services.get(index).updateCost(itemCost);
+            services.get(index).setName(itemName);
+            services.get(index).setCost(itemCost);
         }
     }
 
