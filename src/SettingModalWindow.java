@@ -3,6 +3,7 @@ import javax.swing.JDialog;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import java.awt.GridLayout;
@@ -22,6 +23,14 @@ public class SettingModalWindow
         this.parentFrame    =   parentFrame;
     }
 
+    /*
+     *  @params     void
+     *
+     *  @brief
+     *  The method initialises the dialog window for the settings panel.
+     *
+     *  @return     void
+     */
     public void displaySettingDialog()
     {
         JDialog settingWindow   =   new JDialog(this.parentFrame, "System settings", true);
@@ -45,7 +54,7 @@ public class SettingModalWindow
 
         JLabel serviceCostLabel     =   new JLabel("Service Cost:");
         JTextField serviceCost      =   new JTextField();
-        
+
         inputPanel.add(serviceNameLabel);
         inputPanel.add(serviceName);
 
