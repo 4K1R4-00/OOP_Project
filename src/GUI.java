@@ -38,7 +38,7 @@ class GUI extends JFrame
     private JLabel grandTotalLabel;
 
     private DefaultListModel<String> checkoutListing    =   new DefaultListModel<String>();
-    private JList<String> checkoutListingDisplayed      =   new JList<String>();
+    private JList<String> checkoutListingDisplayed      =   new JList<String>(checkoutListing);
 
     private JScrollPane checkoutScroll  =   new JScrollPane(checkoutListingDisplayed,
                                                             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -213,9 +213,6 @@ class GUI extends JFrame
 
             checkoutListing.addElement(serviceInformation);
         }
-
-        //checkoutListingDisplayed.setModel(checkoutListing);
-        checkoutListingDisplayed.setModel(checkoutListing);
 
         checkoutScroll.revalidate();
         checkoutScroll.repaint();
