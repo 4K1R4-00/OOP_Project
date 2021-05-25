@@ -93,7 +93,7 @@ class GUI extends JFrame
         JMenuItem product   =   new JMenuItem("Product");
         JMenuItem service   =   new JMenuItem("Service");
 
-        JMenuItem info      =   new JMenuItem("Statistics");
+        JMenuItem info      =   new JMenuItem("About");
 
         info.addActionListener(new InfoMenuListener());
 
@@ -289,7 +289,6 @@ class GUI extends JFrame
     {
         public void actionPerformed(ActionEvent ae)
         {
-//            System.out.println("The info button has been pressed");
             GUI parentFrame =   new GUI();
             AboutModalWindow aboutDialog    =   new AboutModalWindow(parentFrame);
             aboutDialog.displayInfo();
