@@ -1,3 +1,12 @@
+/*
+ *  @authors
+ *  AKMAL 'AISY BIN RUDY                        52215220045
+ *  NUR ARIFA BINTI NOR AZLAN                   52215220050
+ *  DANISH IMRAN BIN MOHD ARIF ARCHI            52215220060
+ *  MOHD FAIZ BIN RADZI                         52215220049
+ *
+ */
+
 import javax.swing.JFrame;
 import javax.swing.JDialog;
 
