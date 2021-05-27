@@ -1,8 +1,18 @@
+/*
+ *  @authors
+ *  AKMAL 'AISY BIN RUDY                        52215220045
+ *  NUR ARIFA BINTI NOR AZLAN                   52215220050
+ *  DANISH IMRAN BIN MOHD ARIF ARCHI            52215220060
+ *  MOHD FAIZ BIN RADZI                         52215220049
+ *
+ */
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JDialog;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -253,7 +263,6 @@ public class ItemModalWindow implements WindowListener
         {
             public void actionPerformed(ActionEvent ae)
             {
-
                 setConfirmItem();
 
                 itemWindow.setVisible(false);

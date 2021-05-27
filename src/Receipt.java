@@ -1,3 +1,12 @@
+/*
+ *  @authors
+ *  AKMAL 'AISY BIN RUDY                        52215220045
+ *  NUR ARIFA BINTI NOR AZLAN                   52215220050
+ *  DANISH IMRAN BIN MOHD ARIF ARCHI            52215220060
+ *  MOHD FAIZ BIN RADZI                         52215220049
+ *
+ */
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -72,7 +81,7 @@ class Receipt
      *
      *  @return     void
      */
-    private String receiptName()
+    private String generatedReceiptName()
     {
         LocalDateTime dateTime              =   LocalDateTime.now();
         DateTimeFormatter dateTimeFormat    =   DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss");
@@ -82,12 +91,24 @@ class Receipt
         return receiptName;
     }
 
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *  This functions uses the auto-generated receipt name to assign the receipt a file output.
+     *
+     *  Before it does so, it iterate over all confirmed products and service items, before
+     *  writing them into the file.
+     *
+     *  @returns    void
+     */
     private void receiptFormat()
     {
-        this.receiptName    =   receiptName();
+        this.receiptName    =   generatedReceiptName();
 
         NumberFormat df     =   DecimalFormat.getInstance();
 
+        //  String formating setting for decimal outputs.
         df.setMinimumFractionDigits(2);
         df.setMaximumFractionDigits(4);
         df.setRoundingMode(RoundingMode.DOWN);
@@ -147,7 +168,6 @@ class Receipt
         } catch (IOException e)
         {
             System.out.println("A file error has occured during receipt generation.");
-            e.printStackTrace();
         }
     }
 

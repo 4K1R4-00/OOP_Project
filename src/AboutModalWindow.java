@@ -1,3 +1,12 @@
+/*
+ *  @authors
+ *  AKMAL 'AISY BIN RUDY                        52215220045
+ *  NUR ARIFA BINTI NOR AZLAN                   52215220050
+ *  DANISH IMRAN BIN MOHD ARIF ARCHI            52215220060
+ *  MOHD FAIZ BIN RADZI                         52215220049
+ *
+ */
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,6 +22,14 @@ public class AboutModalWindow {
         this.parentFrame    =   parentFrame;
     }
 
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *  Displays the info and the Option pane for the developer information.
+     *
+     *  @return     void
+     */
     public void displayInfo(){
         message("AKMAL AISY BIN RUDY", "52215220045");
         message("MOHD FAIZ BIN RADZI", "52215220049");
