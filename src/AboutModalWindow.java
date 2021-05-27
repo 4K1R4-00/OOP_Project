@@ -13,6 +13,14 @@ public class AboutModalWindow {
         this.parentFrame    =   parentFrame;
     }
 
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *  Displays the info and the Option pane for the developer information.
+     *
+     *  @return     void
+     */
     public void displayInfo(){
         message("AKMAL AISY BIN RUDY", "52215220045");
         message("MOHD FAIZ BIN RADZI", "52215220049");

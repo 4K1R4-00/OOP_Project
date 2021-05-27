@@ -4,6 +4,15 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JList;
+import javax.swing.DefaultListModel;
+
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 
 import java.awt.GridLayout;
@@ -15,8 +24,8 @@ public class SettingModalWindow
     private JPanel inputPanel   =   new JPanel(new GridLayout(0, 2));
     private JPanel listPanel    =   new JPanel();
 
-    private Product productList;
-    private Service serviceList;
+    private ArrayList<Product> productList;
+    private ArrayList<Service> serviceList;
 
     public SettingModalWindow(JFrame parentFrame)
     {
@@ -24,7 +33,7 @@ public class SettingModalWindow
     }
 
     /*
-     *  @params     void
+     *  @param      void
      *
      *  @brief
      *  The method initialises the dialog window for the settings panel.
@@ -47,7 +56,14 @@ public class SettingModalWindow
         settingWindow.setVisible(true);
     }
 
-    public Service displayServiceSetting()
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *
+     *  @return     Service
+     */
+    public ArrayList displayServiceSetting()
     {
         JLabel serviceNameLabel     =   new JLabel("Service Name:");
         JTextField serviceName      =   new JTextField();
@@ -60,6 +76,15 @@ public class SettingModalWindow
 
         inputPanel.add(serviceCostLabel);
         inputPanel.add(serviceCost);
+
+        JButton cancel  =   new JButton("Cancel");
+        JButton save    =   new JButton("Save");
+
+        cancel.addActionListener(new CancelButton());
+        inputPanel.add(cancel);
+
+        save.addActionListener(new SaveButton());
+        inputPanel.add(save);
 
         displaySettingDialog();
 
@@ -74,7 +99,7 @@ public class SettingModalWindow
      *
      *  @return     Product
      */
-    public Product displayProductSetting()
+    public ArrayList displayProductSetting()
     {
         JLabel productNameLabel     =   new JLabel("Product Name:");
         JTextField productName      =   new JTextField();
@@ -85,5 +110,39 @@ public class SettingModalWindow
         displaySettingDialog();
 
         return this.productList;
+    }
+
+    public void setServiceList(ArrayList<Service> service)
+    {
+        this.serviceList    =   service;
+    }
+
+    public void setProductList(ArrayList<Product> product)
+    {
+        this.productList    =   product;
+    }
+
+    /*
+     *  @brief
+     *
+     */
+    class CancelButton implements ActionListener
+    {
+        public void actionPerformed(ActionEvent ae)
+        {
+
+        }
+    }
+
+    /*
+     *  @brief
+     *
+     */
+    class SaveButton implements ActionListener
+    {
+        public void actionPerformed(ActionEvent ae)
+        {
+
+        }
     }
 }

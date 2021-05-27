@@ -3,6 +3,7 @@ import javax.swing.JPanel;
 import javax.swing.JDialog;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -253,7 +254,6 @@ public class ItemModalWindow implements WindowListener
         {
             public void actionPerformed(ActionEvent ae)
             {
-
                 setConfirmItem();
 
                 itemWindow.setVisible(false);

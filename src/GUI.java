@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -20,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class GUI extends JFrame
 {
@@ -37,6 +39,7 @@ class GUI extends JFrame
 
     private JLabel grandTotalLabel;
 
+    //  checkoutListing stores the temporary checkout list to pass onto the JList display
     private DefaultListModel<String> checkoutListing    =   new DefaultListModel<String>();
     private JList<String> checkoutListingDisplayed      =   new JList<String>(checkoutListing);
 
@@ -51,10 +54,16 @@ class GUI extends JFrame
     private ArrayList<Product> products;
     private ArrayList<Service> services;
 
+    //  List to hold the product and services. Very in-efficient but I have no
+    //  Knowledge on how to make it more efficient as of now O(n^2).
     private ArrayList<Product> productCheckout      =   new ArrayList<Product>(5);
     private ArrayList<Service> serviceCheckout      =   new ArrayList<Service>(5);
 
-    private double checkoutGrandTotal   =   0.0;
+    //  Globally save the checkout grand total per customer in order to
+    //  Easily pass the value on.
+    private double checkoutGrandTotal;
+
+    private double totalDailySales;
 
     // Default constructor
     GUI() {}
@@ -86,24 +95,52 @@ class GUI extends JFrame
         this.setLayout(frameLayout);
 
         //  Menu bar
-        JMenuBar menuBar    =   new JMenuBar();
-        JMenu systemMenu    =   new JMenu("System");
-        JMenu settingMenu   =   new JMenu("Setting");
+        JMenuBar menuBar        =   new JMenuBar();
+        JMenu systemMenu        =   new JMenu("System");
+        JMenu settingMenu       =   new JMenu("Setting");
 
-        JMenuItem product   =   new JMenuItem("Product");
-        JMenuItem service   =   new JMenuItem("Service");
+        JMenuItem product       =   new JMenuItem("Product");
+        JMenuItem service       =   new JMenuItem("Service");
 
-        JMenuItem info      =   new JMenuItem("About");
+        JMenuItem about         =   new JMenuItem("About");
+        JMenuItem statistics    =   new JMenuItem("Daily Earnings");
 
-        info.addActionListener(new InfoMenuListener());
+        about.addActionListener(new InfoMenuListener());
+        systemMenu.add(about);
 
-        systemMenu.add(info);
+        //  in-line action listener implementation for statistic menu item
+        statistics.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                GUI parentFrame     =   new GUI();
 
+                JPanel statsPanel   =   new JPanel(new BorderLayout(5, 5));
+                statsPanel.add(new JLabel("System Statistics"), BorderLayout.NORTH);
+
+                JPanel formatPanel  =   new JPanel(new GridLayout(0, 2, 4, 4));
+                formatPanel.add(new JLabel("Total Daily Earnings:"));
+                formatPanel.add(new JLabel(String.valueOf(totalDailySales), SwingConstants.CENTER));
+
+                statsPanel.add(formatPanel, BorderLayout.CENTER);
+
+                //  Generate the message using this main window as a parent and apply the stats panel
+                JOptionPane.showMessageDialog(parentFrame, statsPanel, "Stored Earnings", JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+
+        systemMenu.add(statistics);
+        menuBar.add(systemMenu);
+
+        /*
+        product.addActionListener(new ProductSettingMenuListener());
         settingMenu.add(product);
+
+        service.addActionListener(new ServiceSettingMenuListener());
         settingMenu.add(service);
 
-        menuBar.add(systemMenu);
         menuBar.add(settingMenu);
+        */
 
         //  Set the menu bar
         this.setJMenuBar(menuBar);
@@ -144,6 +181,9 @@ class GUI extends JFrame
      *  The button for products is based on the size of the array.
      *  While the button for services is based on the maximum size of the products array.
      *
+     *  The drawing method used might be in-efficient due to O(n^2) but due to inexperience
+     *  There is no other solution that can be applied.
+     *
      *  @return     void
      */
     private void createItemListing(ArrayList<Product> products, ArrayList<Service> services)
@@ -151,19 +191,29 @@ class GUI extends JFrame
         //  Remove all component buttons in item panel for regeneration.
         itemPanel.removeAll();
 
+        //  Assigns the maximum size of the product array.
         int productMaxSize      =   products.size();
 
+        //  Loop over the product listing first and apply to the item panel based on
+        //  the product array max size.
         for (int i = 0; i < productMaxSize; i++)
         {
+            //  Create a button with the product name.
             JButton itemButton  =   new JButton(products.get(i).getName());
 
+            //  Assign the value of the item array index to the button in order to
+            //  easily differenciate the difference of products per button.
             itemButton.setActionCommand(String.valueOf(i));
             itemButton.addActionListener(new ItemListener());
 
+            //  Add the button to the itemPanel
             itemPanel.add(itemButton);
         }
 
-        //  The starting value of the iterator is after the size of products array.
+        //  Loop over the service array but start with the value after the product array max
+        //  size.
+        //
+        //  Formula; Pmx <= x < (Smx + Pmx)
         for (int i = productMaxSize; i < (services.size() + productMaxSize); i++)
         {
             JButton itemButton  =   new JButton(services.get(i - productMaxSize).getName());
@@ -194,30 +244,47 @@ class GUI extends JFrame
      */
     private void getCheckoutListing()
     {
+        //  This is to avoid readding ontop of existing components
         checkoutListing.clear();
 
+        //  Add the productCheckout list to the single checkout list first
         for (int i = 0; i < productCheckout.size(); i++)
         {
+            //  Convert the information to a writable string
             String productInformation   =   productCheckout.get(i).getName() + "     x" +
                                             productCheckout.get(i).getQuantity() + "   RM " +
                                             productCheckout.get(i).getCost();
 
+            //  Add the String information to the checkout list
             checkoutListing.addElement(productInformation);
         }
 
+        //  Then add the service checkout list to the single checkout list
         for (int i = 0; i < serviceCheckout.size(); i++)
         {
+            //  Convert the infomration to a writable String.
             String serviceInformation   =   serviceCheckout.get(i).getName() + "     x" +
                                             serviceCheckout.get(i).getQuantity() + "   RM " +
                                             serviceCheckout.get(i).getCost();
 
+            //  Add the String information to the checkout list.
             checkoutListing.addElement(serviceInformation);
         }
 
+        //  revalidate the readded components
         checkoutScroll.revalidate();
         checkoutScroll.repaint();
     }
 
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *  Get the grand total of both products and services by iterating through the values of
+     *  the stored items and get the total before storing them in the global grandtotal
+     *
+     *  @return     void
+     */
     private void getGrandTotal()
     {
         double checkoutTotal    =   0.0;
@@ -247,10 +314,20 @@ class GUI extends JFrame
         grandTotalLabel.setText("RM " + String.valueOf(this.checkoutGrandTotal));
     }
 
+    /*
+     *  @param      void
+     *
+     *  @brief
+     *  Clears the checkout list and all displayed item in the checkout scroll panel.
+     *
+     *  @return     void
+     */
     private void clearCheckoutList()
     {
+        //  Set current grand total amount to 0.0
         checkoutGrandTotal     =   0.0;
 
+        //  Clear all the arrays that are releated to checkingout.
         productCheckout.clear();
         serviceCheckout.clear();
         checkoutListing.clear();
@@ -258,23 +335,41 @@ class GUI extends JFrame
         checkoutScroll.revalidate();
         checkoutScroll.repaint();
 
+        //  Set the grand total label to 0.0
         grandTotalLabel.setText("RM 0.0");
     }
 
     /*
      *  @brief
-     *  The MenuListener class listens for events that occur in the menubar.
+     *  The ProductSettingMenuListener class listens for events that occur in the menubar.
      *
      *  Instentiating the SettingModalWindow class
      */
-    class SettingMenuListener implements ActionListener
+    class ProductSettingMenuListener implements ActionListener
     {
         public void actionPerformed(ActionEvent ae)
         {
             GUI parentFrame     =   new GUI();
 
             SettingModalWindow settingDialog    =   new SettingModalWindow(parentFrame);
-            settingDialog.displayServiceSetting();
+            settingDialog.setProductList(products);
+        }
+    }
+
+    /*
+     *  @brief
+     *  The ServiceSettingMenuListener class listens for events that occur in the menubar.
+     *
+     *  Instentiating the SettingModalWindow class
+     */
+    class ServiceSettingMenuListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent ae)
+        {
+            GUI parentFrame     =   new GUI();
+
+            SettingModalWindow serviceSetting   =   new SettingModalWindow(parentFrame);
+            serviceSetting.setServiceList(services);
         }
     }
 
@@ -291,6 +386,7 @@ class GUI extends JFrame
             aboutDialog.displayInfo();
         }
     }
+
     /*
      *  @brief
      *  The ItemListener listens to the events in the item menu.
@@ -373,7 +469,14 @@ class GUI extends JFrame
         public void actionPerformed(ActionEvent ae)
         {
             Receipt receipt     =   new Receipt(productCheckout, serviceCheckout, checkoutGrandTotal);
+
+            //  Generate the receipts
             receipt.generateReceipt();
+
+            //  Append the current grand total to the daily sales
+            totalDailySales     +=  checkoutGrandTotal;
+
+            //  Clear the checkout list
             clearCheckoutList();
         }
     }
