@@ -121,6 +121,7 @@ class Receipt
 
             receiptOutput.write("===========================================\n");
             receiptOutput.write("       THANK YOU FOR COMING TO SALON       \n");
+            receiptOutput.write("              FUSION HAIR SALON            \n");
             receiptOutput.write("===========================================\n");
 
             for (int i = 0; i < this.productList.size(); i++)
