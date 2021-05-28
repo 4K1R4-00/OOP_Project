@@ -67,6 +67,7 @@ public class Service extends Item
      *  @param      int     setAppointmentType
      *
      *  @brief
+     *  Sets the service appointment type
      *
      *  @return     void
      */
@@ -79,12 +80,26 @@ public class Service extends Item
      *  @param      String  setAppointmentDate
      *
      *  @brief
+     *  Sets the service appointment date
      *
      *  @return     void
      */
     public void setServiceAppointmentDate(String setAppointmentDate)
     {
         this.appointmentDate    =   LocalDate.parse(setAppointmentDate, this.dateFormat);
+    }
+
+    /*
+     *  @param      LocalDate  setAppointmentDate
+     *
+     *  @brief
+     *  Sets the service appointment date, method overriding
+     *
+     *  @return     void
+     */
+    public void setServiceAppointmentDate(LocalDate setAppointmentDate)
+    {
+        this.appointmentDate    =   setAppointmentDate;
     }
 
     /*
