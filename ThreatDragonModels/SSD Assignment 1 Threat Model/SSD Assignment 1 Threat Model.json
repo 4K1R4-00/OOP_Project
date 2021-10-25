@@ -115,6 +115,14 @@
                   "type": "Information disclosure",
                   "description": "The threat actor is able to read information over the unsecured HTTP protocol, this makes any input request sent as plain text and visible .",
                   "mitigation": "Using HTTPS and SSL/TLS certification to encrypt the network connection between the client application and webserver."
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "title": "Unvalidated redirects and forwarding of URL via HTTP",
+                  "type": "Tampering",
+                  "description": "Threat actors are able to manipulate the redirect location and forward the client application to a vulnerable or malicious web server. There is no signing or encryption to prevent the attacker from manipulating the location.",
+                  "mitigation": "Using HTTPS and valid SSL/TLS certification to prevent redirects to unsigned external web servers."
                 }
               ],
               "attrs": {
@@ -161,6 +169,16 @@
               "hasOpenThreats": false,
               "isPublicNetwork": true,
               "protocol": "HTTP",
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "title": "Stealing authenticated user token via unsecure HTTP",
+                  "type": "Spoofing",
+                  "description": "The threat actor is able to steal the access token and refresh token from the user, by viewing the unsecured and un-encrypted HTTP connection. The tokens are visible via the headers.",
+                  "mitigation": "The usage of HTTPS and SSL/TLS certification is able to encrypt the network between the client application and the webserver."
+                }
+              ],
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
