@@ -1,0 +1,25 @@
+{
+  "summary": {
+    "title": "SSD Assignment 1 Threat Model",
+    "owner": "AKMAL AISY BIN RUDY",
+    "description": "The threat model is for the SSD web architecture diagram."
+  },
+  "detail": {
+    "contributors": [
+      {
+        "name": "DANISH IMRAN BIN MOHD ARIF ARCHI"
+      },
+      {
+        "name": "NUR ARIFA BINTI NOR AZLAN"
+      }
+    ],
+    "diagrams": [
+      {
+        "title": "Threat Model",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0
+      }
+    ],
+    "reviewer": "AKMAL AISY BIN RUDY"
+  }
+}
