@@ -17,7 +17,202 @@
       {
         "title": "Threat Model",
         "thumbnail": "./public/content/images/thumbnail.jpg",
-        "id": 0
+        "id": 0,
+        "diagramJson": {
+          "cells": [
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 118,
+                "y": 185
+              },
+              "angle": 0,
+              "id": "d9e13be0-6687-4f32-a735-810218227c11",
+              "z": 1,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "WEB BROWSER"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 335,
+                "y": 15
+              },
+              "target": {
+                "x": 271,
+                "y": 401
+              },
+              "vertices": [
+                {
+                  "x": 287,
+                  "y": 128
+                },
+                {
+                  "x": 334,
+                  "y": 275
+                }
+              ],
+              "id": "6fe5d7a3-6b19-4a64-9405-2e1192d8dc51",
+              "z": 2,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 590,
+                "y": 174
+              },
+              "angle": 0,
+              "id": "b9d77aef-2766-425a-9a64-7f904cec6c07",
+              "z": 3,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "NGINX\nREVERSE\nPROXY"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "d9e13be0-6687-4f32-a735-810218227c11"
+              },
+              "target": {
+                "id": "b9d77aef-2766-425a-9a64-7f904cec6c07"
+              },
+              "vertices": [
+                {
+                  "x": 444,
+                  "y": 175
+                }
+              ],
+              "id": "ec413507-16c6-4efc-8ab8-d19bce6e7726",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.4970713841320433,
+                    "offset": -15.524244698590563
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "flow 3",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 4,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "b9d77aef-2766-425a-9a64-7f904cec6c07"
+              },
+              "target": {
+                "id": "d9e13be0-6687-4f32-a735-810218227c11"
+              },
+              "vertices": [
+                {
+                  "x": 442,
+                  "y": 263
+                }
+              ],
+              "id": "0dc76c87-0422-4f6a-a937-467a161600c1",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5009848774056536,
+                    "offset": -16.22293056250443
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "flow 4",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 5,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 592,
+                "y": 432
+              },
+              "angle": 0,
+              "id": "25146a9c-8046-4d92-a3e6-fba8c7f6063f",
+              "z": 6,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "AUTHENTIcatio\nn SERVER"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            }
+          ]
+        },
+        "size": {
+          "height": 590,
+          "width": 790
+        }
       }
     ],
     "reviewer": "AKMAL AISY BIN RUDY"
