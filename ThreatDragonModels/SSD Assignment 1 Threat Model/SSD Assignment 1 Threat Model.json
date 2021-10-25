@@ -656,12 +656,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.640756562408772,
-                    "offset": -18.471511060910988
+                    "distance": 0.5688553188223625,
+                    "offset": -32.86892353642718
                   },
                   "attrs": {
                     "text": {
-                      "text": "SQL QUERY REQUEST\nFOR ITEMS IN STORE",
+                      "text": "SQL QUERY REQUEST\nFOR STORE ITEMS\nDATA",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -704,7 +704,7 @@
                   },
                   "attrs": {
                     "text": {
-                      "text": "SQL RESPONSE FOR\nITEMS IN STORE",
+                      "text": "SQL RESPONSE FOR\nSTORE ITEMS DATA",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -742,12 +742,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.48308734334955333,
-                    "offset": -19.770172470413275
+                    "distance": 0.6128027478007314,
+                    "offset": -38.0241282538408
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 20",
+                      "text": "SQL QUERY REQUEST\nFOR STORE DATA",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -756,6 +756,7 @@
               ],
               "z": 22,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -784,12 +785,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.558415915058092,
-                    "offset": -23.766301397503454
+                    "distance": 0.5012523424421048,
+                    "offset": -35.728042815388804
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 21",
+                      "text": "SQL QUERY\nRESPONSE FOR\nSTORE DATA",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -798,6 +799,7 @@
               ],
               "z": 23,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
