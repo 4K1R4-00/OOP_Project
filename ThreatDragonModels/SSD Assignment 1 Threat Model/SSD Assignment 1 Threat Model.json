@@ -824,12 +824,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.4941105647972252,
-                    "offset": -34.8608925344555
+                    "distance": 0.503469806958418,
+                    "offset": -38.64361161429709
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 22",
+                      "text": "HTTP PROXY\nREDIRECT TO\nRESOURCE REQUEST",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -838,6 +838,7 @@
               ],
               "z": 24,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -866,12 +867,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.4880595645136493,
-                    "offset": -26.470251665827217
+                    "distance": 0.49939532578324114,
+                    "offset": -49.331342755186405
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 23",
+                      "text": "HTTP RESOURCE\nRESPONSE TO PROXY\nREDIRECT",
                       "font-weight": "400",
                       "font-size": "small"
                     }
