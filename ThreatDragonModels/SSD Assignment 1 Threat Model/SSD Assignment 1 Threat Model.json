@@ -656,12 +656,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.49661725963014974,
-                    "offset": -20.924890331448285
+                    "distance": 0.640756562408772,
+                    "offset": -18.471511060910988
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 18",
+                      "text": "SQL QUERY REQUEST\nFOR ITEMS IN STORE",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -670,6 +670,7 @@
               ],
               "z": 20,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -698,12 +699,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.49387626013487684,
-                    "offset": -27.105048466680962
+                    "distance": 0.36515656091029713,
+                    "offset": -31.65668390541752
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 19",
+                      "text": "SQL RESPONSE FOR\nITEMS IN STORE",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -712,6 +713,7 @@
               ],
               "z": 21,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -881,6 +883,7 @@
               ],
               "z": 25,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -909,7 +912,7 @@
                   "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
-                  "text": "Static Stored Images"
+                  "text": "STATIC IMAGES\nDATABASE"
                 },
                 ".element-text": {
                   "class": "element-text hasNoOpenThreats isInScope"
@@ -935,12 +938,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.5175909996032715,
-                    "offset": -16
+                    "distance": 0.4847672128823551,
+                    "offset": -32.01560495288134
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 25",
+                      "text": "HTTP REQUEST TO\nRESOURCE\nLOCATION",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -949,6 +952,7 @@
               ],
               "z": 27,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -977,12 +981,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.4882774353027344,
-                    "offset": -20
+                    "distance": 0.4883058600399643,
+                    "offset": -34.045533948025046
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 26",
+                      "text": "HTTP RESPONSE TO\nRESOURCE\nLOCATION",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -991,6 +995,7 @@
               ],
               "z": 28,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
