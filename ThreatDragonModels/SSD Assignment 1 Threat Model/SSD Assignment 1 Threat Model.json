@@ -107,6 +107,16 @@
               "hasOpenThreats": false,
               "protocol": "HTTP",
               "isPublicNetwork": true,
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "title": "Stealing user credential information via unsecured HTTP",
+                  "type": "Information disclosure",
+                  "description": "The threat actor is able to read information over the unsecured HTTP protocol, this makes any input request sent as plain text and visible .",
+                  "mitigation": "Using HTTPS and SSL/TLS certification to encrypt the network connection between the client application and webserver."
+                }
+              ],
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
