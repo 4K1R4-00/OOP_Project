@@ -988,6 +988,48 @@
                   "class": "connection hasNoOpenThreats isInScope"
                 }
               }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "b4d50ce4-502f-4e36-a001-d0492339fdc6"
+              },
+              "target": {
+                "id": "7a92706e-f045-4c44-a2e9-a9c5f04c9e8c"
+              },
+              "vertices": [
+                {
+                  "x": 1303,
+                  "y": 395
+                }
+              ],
+              "id": "eff3c416-4c70-41a0-a4f8-294984365ab2",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5217822099635081,
+                    "offset": 53.92139967709822
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "flow 27",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 29,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
             }
           ]
         },
