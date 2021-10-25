@@ -514,12 +514,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.5039692139641403,
-                    "offset": -40.36893597745876
+                    "distance": 0.4564209513461859,
+                    "offset": -60.096450903230256
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 14",
+                      "text": "HTTP API REQUEST",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -528,6 +528,7 @@
               ],
               "z": 16,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -560,12 +561,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.49344377691795127,
-                    "offset": -46.758317576343586
+                    "distance": 0.4994896195973704,
+                    "offset": -69.80450058986102
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 15",
+                      "text": "HTTP API RESPONSE",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -574,6 +575,7 @@
               ],
               "z": 17,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
