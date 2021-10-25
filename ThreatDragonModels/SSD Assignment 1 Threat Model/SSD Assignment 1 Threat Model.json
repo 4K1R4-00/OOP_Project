@@ -83,20 +83,20 @@
               },
               "vertices": [
                 {
-                  "x": 426,
-                  "y": 424
+                  "x": 480,
+                  "y": 309
                 }
               ],
               "id": "ec413507-16c6-4efc-8ab8-d19bce6e7726",
               "labels": [
                 {
                   "position": {
-                    "distance": 0.4970713841320433,
-                    "offset": -15.524244698590563
+                    "distance": 0.5017944233333361,
+                    "offset": -37.00212183296324
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 3",
+                      "text": "HTTP REQUEST TO\nSERVER",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -105,6 +105,8 @@
               ],
               "z": 4,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
+              "isPublicNetwork": true,
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -125,20 +127,20 @@
               },
               "vertices": [
                 {
-                  "x": 420,
-                  "y": 486
+                  "x": 478,
+                  "y": 378
                 }
               ],
               "id": "0dc76c87-0422-4f6a-a937-467a161600c1",
               "labels": [
                 {
                   "position": {
-                    "distance": 0.5009848774056536,
-                    "offset": -16.22293056250443
+                    "distance": 0.5028304605430933,
+                    "offset": -31.09362723107782
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 4",
+                      "text": "HTTP RESPONSE\nFROM SERVER",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -147,6 +149,8 @@
               ],
               "z": 5,
               "hasOpenThreats": false,
+              "isPublicNetwork": true,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
