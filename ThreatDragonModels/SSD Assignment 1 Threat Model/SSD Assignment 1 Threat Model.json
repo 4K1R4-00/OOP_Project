@@ -240,8 +240,8 @@
               },
               "vertices": [
                 {
-                  "x": 694,
-                  "y": 514
+                  "x": 684,
+                  "y": 512
                 }
               ],
               "id": "0669ab26-1f7b-4c65-a65b-348bffba704f",
@@ -310,20 +310,20 @@
               },
               "vertices": [
                 {
-                  "x": 544,
-                  "y": 873
+                  "x": 555,
+                  "y": 869
                 }
               ],
               "id": "8c299408-04c2-41f0-887e-67af8a2cdb7b",
               "labels": [
                 {
                   "position": {
-                    "distance": 0.4566824937913677,
-                    "offset": 29.016925611724904
+                    "distance": 0.44176842084230805,
+                    "offset": 79.0345213261303
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 9",
+                      "text": "SQL QUERY REQUEST\nFOR USER DATA",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -332,6 +332,7 @@
               ],
               "z": 10,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -352,7 +353,7 @@
               },
               "vertices": [
                 {
-                  "x": 628,
+                  "x": 613,
                   "y": 853
                 }
               ],
@@ -360,12 +361,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.547119140625,
-                    "offset": 33
+                    "distance": 0.5269604630961707,
+                    "offset": 76.88852637050101
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 10",
+                      "text": "SQL QUERY\nRESPONSE FOR USER\nDATA",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -374,6 +375,7 @@
               ],
               "z": 11,
               "hasOpenThreats": false,
+              "protocol": "HTTP",
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
