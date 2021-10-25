@@ -60,6 +60,7 @@
               "id": "b9d77aef-2766-425a-9a64-7f904cec6c07",
               "z": 3,
               "hasOpenThreats": false,
+              "privilegeLevel": "15",
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
@@ -202,6 +203,7 @@
               "id": "25146a9c-8046-4d92-a3e6-fba8c7f6063f",
               "z": 6,
               "hasOpenThreats": false,
+              "privilegeLevel": "14",
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
@@ -427,6 +429,7 @@
               "id": "b4d50ce4-502f-4e36-a001-d0492339fdc6",
               "z": 12,
               "hasOpenThreats": false,
+              "privilegeLevel": "10",
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
@@ -453,6 +456,7 @@
               "id": "7a92706e-f045-4c44-a2e9-a9c5f04c9e8c",
               "z": 13,
               "hasOpenThreats": false,
+              "privilegeLevel": "7",
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
