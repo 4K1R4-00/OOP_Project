@@ -1018,12 +1018,12 @@
               "labels": [
                 {
                   "position": {
-                    "distance": 0.5217822099635081,
-                    "offset": 53.92139967709822
+                    "distance": 0.5421849607163055,
+                    "offset": 80.97467224408527
                   },
                   "attrs": {
                     "text": {
-                      "text": "flow 27",
+                      "text": "HTTP UPDATE\nRESOURCE REQUEST\nFROM API STORE",
                       "font-weight": "400",
                       "font-size": "small"
                     }
