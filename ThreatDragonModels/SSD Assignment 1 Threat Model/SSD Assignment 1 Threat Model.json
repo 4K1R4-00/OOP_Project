@@ -470,8 +470,8 @@
               "type": "tm.Boundary",
               "smooth": true,
               "source": {
-                "x": 338,
-                "y": 45
+                "x": 319,
+                "y": 27
               },
               "target": {
                 "x": 176,
@@ -483,8 +483,8 @@
                   "y": 230
                 },
                 {
-                  "x": 350,
-                  "y": 449
+                  "x": 305,
+                  "y": 439
                 }
               ],
               "id": "7a4d0c81-83d2-49d7-bdbd-30a83b5f7c0e",
@@ -519,7 +519,7 @@
                   },
                   "attrs": {
                     "text": {
-                      "text": "HTTP API REQUEST",
+                      "text": "HTTP PROXY\nREDIRECT TO API\nREQUEST",
                       "font-weight": "400",
                       "font-size": "small"
                     }
@@ -566,7 +566,7 @@
                   },
                   "attrs": {
                     "text": {
-                      "text": "HTTP API RESPONSE",
+                      "text": "HTTP API RESPONSE\nTO PROXY REDIRECT",
                       "font-weight": "400",
                       "font-size": "small"
                     }
