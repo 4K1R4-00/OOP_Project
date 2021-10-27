@@ -484,6 +484,16 @@
               "z": 12,
               "hasOpenThreats": false,
               "privilegeLevel": "10",
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "title": "SQL Injection via improper server-side input field sanitization",
+                  "type": "Tampering",
+                  "description": "The store API takes input sent by the client-side input and query the store database. Improper query input from the client enables a SQL injection to occur while the API is querying the database.",
+                  "mitigation": "Proper input sanitization and coding on the API server-side"
+                }
+              ],
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
