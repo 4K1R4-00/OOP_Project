@@ -34,6 +34,16 @@
               "id": "d9e13be0-6687-4f32-a735-810218227c11",
               "z": 1,
               "hasOpenThreats": false,
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "title": "SQL Injection via improper client-side input sanitizing",
+                  "description": "Improper input sanitization on the client-side input fields allowing for SQL injection and foreign queries to be input",
+                  "type": "Tampering",
+                  "mitigation": "Implementing JavaScript based client-side sanitization and validation for the web application input fields to mitigate early attempts."
+                }
+              ],
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
@@ -61,6 +71,16 @@
               "z": 3,
               "hasOpenThreats": false,
               "privilegeLevel": "15",
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "description": "Request from the client-side application are all routed to the Reverse proxy server before reaching the internal network. This makes the reverse proxy vulnerable to request flooding.",
+                  "type": "Denial of service",
+                  "title": "SPAM Distributed Denial-of-service attacks",
+                  "mitigation": "Adding a filter and web-application firewall (WAP) allows for protection from necessary request."
+                }
+              ],
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
