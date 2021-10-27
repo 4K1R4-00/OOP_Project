@@ -240,6 +240,14 @@
                   "type": "Tampering",
                   "description": "The improper structure and code for the authentication server allows for escape characters to be included within the input fields on the client-side.",
                   "mitigation": "Properly remove escape characters from the input query and sanitize the query code before processing them in the SQL database."
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "title": "CSRF attack through client-side application input field",
+                  "type": "Spoofing",
+                  "description": "Each request is re-routed to the authentication server for refresh tokens and status, CSRF can occur on each request through the input field on the client-side application if there is request flooding.",
+                  "mitigation": "Implement input sanitization for escape cases and scripts before request is process."
                 }
               ],
               "attrs": {
