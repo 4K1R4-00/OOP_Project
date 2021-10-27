@@ -224,6 +224,16 @@
               "z": 6,
               "hasOpenThreats": false,
               "privilegeLevel": "14",
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "title": "SQL Injection via improper query code",
+                  "type": "Tampering",
+                  "description": "The improper structure and code for the authentication server allows for escape characters to be included within the input fields on the client-side.",
+                  "mitigation": "Properly remove escape characters from the input query and sanitize the query code before processing them in the SQL database."
+                }
+              ],
               "attrs": {
                 ".element-shape": {
                   "class": "element-shape hasNoOpenThreats isInScope"
