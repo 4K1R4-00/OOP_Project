@@ -27,7 +27,7 @@
                 "height": 80
               },
               "position": {
-                "x": 93,
+                "x": 94,
                 "y": 311
               },
               "angle": 0,
@@ -79,6 +79,14 @@
                   "type": "Denial of service",
                   "title": "SPAM Distributed Denial-of-service attacks",
                   "mitigation": "Adding a filter and web-application firewall (WAP) allows for protection from necessary request."
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "title": "Unsecured HTTP protocol used to route all the request",
+                  "type": "Information disclosure",
+                  "description": "The reverse proxy re-route all the request using the HTTP protocol which is insecure and makes the contents visible as plain text.",
+                  "mitigation": "The reverse proxy should use SSL/TLS certification over the 443 for a more secure solution in transporting and routing data."
                 }
               ],
               "attrs": {
