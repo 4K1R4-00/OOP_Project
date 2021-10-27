@@ -152,6 +152,14 @@
                   "type": "Tampering",
                   "description": "Threat actors are able to manipulate the redirect location and forward the client application to a vulnerable or malicious web server. There is no signing or encryption to prevent the attacker from manipulating the location.",
                   "mitigation": "Using HTTPS and valid SSL/TLS certification to prevent redirects to unsigned external web servers."
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "description": "Improper code input sanitisation on the client-side application and the unsecure connection through public networks without encryption or signing.",
+                  "title": "Cross-site scripting through input fields",
+                  "mitigation": "Sanitize input fields and secure the connection using TLS/SSL HTTPS protocol.",
+                  "type": "Tampering"
                 }
               ],
               "attrs": {
